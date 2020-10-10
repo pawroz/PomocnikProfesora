@@ -11,10 +11,10 @@ engine = create_engine('sqlite:///database.db', echo=True)
 Session = sessionmaker(bind=engine)
 session = Session()
  
-user = User("prowadzacy@gmail.com", "prowadzacy", 1)
+user = User("krzysztof", "prowadzacy@gmail.com", "prowadzacy", 1)
 session.add(user)
  
-user = User("student@gmail.com", "student", 0)
+user = User("pawel", "student@gmail.com", "student", 0)
 session.add(user)
  
 description = "Potrzebuje pomocy z matematyki"

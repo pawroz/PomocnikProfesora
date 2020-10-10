@@ -13,15 +13,17 @@ class User(Base):
     __tablename__ = "users"
  
     id = Column(Integer, primary_key=True)
+    name = Column(String)
     email = Column(String)
     password = Column(String)
-    permision = Column(Integer)
+    permission = Column(Integer)
  
-    def __init__(self, email, password, permision):
+    def __init__(self, name, email, password, permission):
  
+        self.name = name
         self.email = email
         self.password = password
-        self.permision = permision
+        self.permission = permission
  
 class Meeting(Base):
     __tablename__ = "meetings"
