@@ -7,7 +7,7 @@ import uuid
 engine = create_engine('sqlite:///database.db', echo=True)
  
 app = Flask(__name__)
-Bootstrap(app)
+# Bootstrap(app)
 
 # @app.route('/api/login', methods=['POST'])
 # def login():
