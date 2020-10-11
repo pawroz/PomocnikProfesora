@@ -1,12 +1,14 @@
 from flask import Flask, request, session, jsonify, render_template, redirect, url_for
 from sqlalchemy.orm import sessionmaker
 from database import *
+from flask_bootstrap import Bootstrap
 import uuid
  
 engine = create_engine('sqlite:///database.db', echo=True)
  
 app = Flask(__name__)
- 
+Bootstrap(app)
+
 # @app.route('/api/login', methods=['POST'])
 # def login():
  
