@@ -9,8 +9,9 @@
     
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
-
+    <link rel="stylesheet" href="static/main.css">
+    <link rel="stylesheet" href="static/fixed.css">
+    
     <!-- Optional theme -->
     <link rel="shortcut icon" href="{{ url_for('static', filename='logo.png') }}" type="image/x-icon">
     <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/x-icon">
@@ -19,10 +20,101 @@
     <title>Pomocnik Profesora</title>
 </head>
 
-<body class='bg'>
+<body data-spy='scroll' data-target='#navbarResponsive'>
+
+<!-- Start Home Secion -->
+<div id='home'>
+    <!-- Navigation -->
+    <nav class='navbar navbar-expand-md navbar-dark bg-dark fixed-top'>
+        <a class='navbar-brand' href='#'><img src="static/logo.png"></a>
+        <button class='navbar-toggler' type='button' data-toggle='collapse' data-target="#navbarResponsive">
+            <span class='navbar-toggler-icon'></span>
+        </button>
     
+        <div class='collapse navbar-collapse' id='navbarResponsive'>
+            <ul class='navbar-nav ml-auto'>
+                <li class='nav-item'>
+                    <a class='nav-link' href='#home'>Home</a>
+                </li>
+                <li class='nav-item'>
+                    <a class='nav-link' href='#course'>Course</a>
+                </li>
+                <li class='nav-item'>
+                    <a class='nav-link' href='#features'>Features</a>
+                </li>
+                <li class='nav-item'>
+                    <a class='nav-link' href='#resources'>Resources</a>
+                </li>
+                <li class='nav-item'>
+                    <a class='nav-link' href='#clients'>Clients</a>
+                </li>
+                <li class='nav-item'>
+                    <a class='nav-link' href='#contact'>Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- End Navigation -->
+    
+    <!-- Start Landing Page Section -->
+    <div class='landing'>
+        <div class='home-wrap'>
+            <div class='home-inner'>
+            </div>
+        </div>
+    </div>
+    
+    <div class='caption text-center'>
+        <h1>Witamy w Pomocnik Profesora</h1>
+        <h3>Pawel Rozplochowskidsadsadsada</h3>
+        <a class='btn btn-outline-light btn-lg' href='#course'>Get Started</a>
+    </div>
+    <!-- End Landing Page Section -->
+    
+    </div>
+    
+    <!-- End Home Section -->
+
+<!-- Start Course Secion -->
+<div id='course' class='offset'>
+
+</div>
+
+<!-- End Course Section -->
+
+<!-- Start Features Secion -->
+<div id='featuers' class='offset'>
+
+</div>
+
+<!-- End Features Section -->
+
+<!-- Start Resources Secion -->
+<div id='resources' class='offset'>
+
+</div>
+
+<!-- End Resources Section -->
+
+<!-- Start Clients Secion -->
+<div id='clients' class='offset'>
+
+</div>
+
+<!-- End clients Section -->
+
+<!-- Start Contact Secion -->
+<div id='contact' class='offset'>
+
+</div>
+
+<!-- End contact Section -->
+
+
+
+
     <!-- style="background-image: url('static/wallpaper.jpeg');" -->
-    {% block navbar %}
+    <!-- {% block navbar %}
         <nav class="navbar fixed-top navbar-dark bg-dark">
             <a class="navbar-brand" href="#">
                 <img src="{{ url_for('static', filename='logo.png') }}" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -30,15 +122,17 @@
             </a>
         </nav>
     {% endblock navbar %}
-    
-    {% block content %}
+      -->
+    <!-- {% block content %}
         
-    {% endblock %}
+    {% endblock %} -->
 
 
-<!-- Latest compiled and minified JavaScript -->
+
+<!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
 </body>
 </html>
