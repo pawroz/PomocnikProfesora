@@ -7,44 +7,6 @@ import uuid
 engine = create_engine('sqlite:///database.db', echo=True)
  
 app = Flask(__name__)
-# Bootstrap(app)
-
-# @app.route('/api/login', methods=['POST'])
-# def login():
- 
-#     data = request.get_json()
- 
-#     email = data["email"]
- 
-#     password = data["password"]
- 
-#     Session = sessionmaker(bind=engine)
-#     session = Session()
-#     query = session.query(User).filter(User.email.in_([email]), User.password.in_([password]) )
-#     result = query.first()
-#     if result:
-#         return jsonify({'result':'OK'})
-#     else:
-#         return jsonify({'result':'BAD'})
- 
-# @app.route('/api/register', methods=['POST'])
-# def register():
- 
-#     data = request.get_json()
- 
-#     Session = sessionmaker(bind=engine)
-#     session = Session()
- 
-#     email = data["email"]
-#     password = data["password"]
- 
-#     user = User(email, password)
-#     session.add(user)
- 
-#     session.commit()
- 
-#     return jsonify({'result':'OK'})
-
 
 @app.route("/")
 def index():
@@ -126,3 +88,43 @@ def register_student():
 if __name__ == "__main__":
     app.debug = True
     app.run(host = '0.0.0.0',port=5000)
+
+
+
+    # Bootstrap(app)
+
+# @app.route('/api/login', methods=['POST'])
+# def login():
+ 
+#     data = request.get_json()
+ 
+#     email = data["email"]
+ 
+#     password = data["password"]
+ 
+#     Session = sessionmaker(bind=engine)
+#     session = Session()
+#     query = session.query(User).filter(User.email.in_([email]), User.password.in_([password]) )
+#     result = query.first()
+#     if result:
+#         return jsonify({'result':'OK'})
+#     else:
+#         return jsonify({'result':'BAD'})
+ 
+# @app.route('/api/register', methods=['POST'])
+# def register():
+ 
+#     data = request.get_json()
+ 
+#     Session = sessionmaker(bind=engine)
+#     session = Session()
+ 
+#     email = data["email"]
+#     password = data["password"]
+ 
+#     user = User(email, password)
+#     session.add(user)
+ 
+#     session.commit()
+ 
+#     return jsonify({'result':'OK'})
