@@ -1,49 +1,55 @@
 # -*- coding: utf-8 -*-
 from sqlalchemy import *
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine, ForeignKey
 from sqlalchemy import Column, Date, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
- 
-engine = create_engine('sqlite:///database.db', echo=True)
-Base = declarative_base()
- 
+from main import app
+
+# engine = create_engine('sqlite:///database.db', echo=True)
+app.config['SECRET_KEY'] = 'hard to guess string'
+app.config['SQLALCHEMY_DATABASE_URI'] ='sqlite:///database.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+# Base = declarative_base()
+
 ########################################################################
-class User(Base):
+class User(db.Model):
     __tablename__ = "users"
  
-    id = Column(Integer, primary_key=True)
-    name = Column(String)
-    email = Column(String)
-    password = Column(String)
-    permission = Column(Integer)
+    id = db.Column(Integer, primary_key=True)
+    name = db.Column(String)
+    email = db.Column(String)
+    password = db.Column(String)
+    permission = db.Column(Integer)
+    meettings = db.relationship('Meeting', backref='user')
  
-    def __init__(self, name, email, password, permission):
+    def __repr__(self):
+        return '<User %r>' % self.name
  
-        self.name = name
-        self.email = email
-        self.password = password
-        self.permission = permission
- 
-class Meeting(Base):
+class Meeting(db.Model):
     __tablename__ = "meetings"
  
-    id = Column(Integer, primary_key=True)
-    student_id = Column(Integer)
-    teacher_id = Column(Integer)
-    date = Column(String)
-    hour = Column(String)
-    description = Column(String)
-    approved = Column(Integer)
+    id = db.Column(Integer, primary_key=True)
+    student_id = db.Column(Integer)
+    teacher_id = db.Column(Integer)
+    date = db.Column(String)
+    hour = db.Column(String)
+    description = db.Column(String)
+    approved = db.Column(Integer)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    
+    def __repr__(self):
+        return '<taecher Id %r>' % self.teacher_id  
+    # def __init__(self, student_id, teacher_id, date, hour, description, approved):
  
-    def __init__(self, student_id, teacher_id, date, hour, description, approved):
- 
-        self.student_id = student_id
-        self.teacher_id = teacher_id
-        self.date = date
-        self.hour = hour
-        self.description = description
-        self.approved = approved
+    #     self.student_id = student_id
+    #     self.teacher_id = teacher_id
+    #     self.date = date
+    #     self.hour = hour
+    #     self.description = description
+    #     self.approved = approved
 
 # create tables
-Base.metadata.create_all(engine)
+# Base.metadata.create_all(engine)

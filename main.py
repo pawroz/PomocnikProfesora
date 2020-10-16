@@ -3,11 +3,13 @@ from sqlalchemy.orm import sessionmaker
 from database import *
 from flask_bootstrap import Bootstrap
 import uuid
+from flask_sqlalchemy import SQLAlchemy
  
 engine = create_engine('sqlite:///database.db', echo=True)
  
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
+
 @app.route("/")
 def index():
     return render_template("layout.html")
