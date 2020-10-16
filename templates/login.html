@@ -1,20 +1,305 @@
-{% extends "layout.html" %}
-{% block content %}
-    <div class="container">
-        <div class="row" style="margin-top: 40px">
-            <div class="col-sm-6">
-                <form method="POST">
-                    <div class="form-group">
-                      <label for="email">Email: </label>
-                      <input type="text" name="email" class="form-control" id="email">
-                    </div>
-                    <div class="form-group">
-                      <label for="email">Password : </label>
-                      <input type="password" name="passw" class="form-control" id="passw">
-                    </div>
-                    <button type="submit" class="btn form-control btn-default">Loginn</button>
-                </form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/main.css">
+    <link rel="stylesheet" href="static/fixed.css">
+    
+    <!-- Scripts -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="bootstrap-4.1.3-dist/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- Optional theme -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='logo.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/x-icon">
+
+    <!-- Title -->
+    <title>Pomocnik Profesora</title>
+</head>
+
+<body data-spy="scroll" data-target="#navbarResponsive">
+
+<!-- Start Home Secion -->
+<div id="home">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#"><img src="static/logo.png"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#home">Strona glowna</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#course">Zarejestruj sie</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#features">Informacje</a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="#resources">Resources</a>
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#clients">Klienci</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Kontant</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- End Navigation -->
+    
+    <!-- Start Landing Page Section -->
+    <div class="landing">
+        <div class="home-wrap">
+            <div class="home-inner">
             </div>
         </div>
     </div>
-{% endblock content %}
+    <div class="caption text-center">
+        <div class="container">
+            <div class="row" style="margin-top: 40px">
+                <div class="col-sm-6 mx-auto">
+                    <form method="POST">
+                        <div class="form-group">
+                          <label for="email">Email: </label>
+                          <input type="text" name="email" class="form-control" id="email">
+                        </div>
+                        <div class="form-group">
+                          <label for="email">Password : </label>
+                          <input type="password" name="passw" class="form-control" id="passw">
+                        </div>
+                        <button type="submit" class="btn btn-secondary btn-md" target="_blank">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Landing Page Section -->
+    
+    </div>
+    
+    <!-- End Home Section -->
+
+<!-- Start Course Secion -->
+<div id="course" class="offset">
+<div class="col-12 narrow text-center">
+    <h1>Pomocnik Profesora</h1>
+    <p class="lead">Aplikacja, ktora pomaga prowadzacym jak i uczniom.(krotkie tresciwe zdanie)</p>
+    <a class="btn btn-secondary btn-md" href="#" target="_blank">
+        Zarejestruj sie jako prowadzacy</a>
+    <a class="btn btn-secondary btn-md" href="/register_student" target="_blank">
+        Zarejestruj sie jako student</a>
+</div>
+
+</div>
+
+<!-- End Course Section -->
+
+<!-- Start Features Section -->
+<div id="features" class="offset">
+
+<!-- Start Jumbotron -->
+<div class="jumbotron">
+<div class="narrow text-center">
+    <div class="col-12">
+        <h3 class="heading">Pp</h3>
+        <div class="heading-underline"></div>
+    </div>
+
+    <div class="row text-center">
+
+        <div class="col-md-4">
+            <div class="feature">
+                <!-- <i class="fas fa-play-circle fa-4x" data-fa-transform="shrink-3 up-5"></i> -->
+                <h3>Pomoc w zajeciach</h3>
+                <p>Kiedy chcesz klikasz i masz</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature">
+                <!-- <i class="fas fa-sliders-h fa-4x" data-fa-transform="shrink-4.5 up-4.5"></i> -->
+                <h3>Pomoc z teoria</h3>
+                <p>Kiedy chcesz klikasz i masz</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature">
+                <!-- <i class="fab fa-wpforms fa-4x" data-fa-transform="shrink-3 up-5"></i> -->
+                <h3>Pomoc z zadaniami</h3>
+                <p>Kiedy chcesz klikasz i masz</p>
+            </div>
+        </div>
+
+    </div> <!-- End Row -->
+
+</div><!-- End Narrow -->
+</div> <!-- End Jumbotron -->
+
+</div>
+<!-- End Features Section -->
+
+<!-- Start Resources Secion -->
+<div id="resources" class="offset">
+
+<div class="fixed-background">
+
+<div class="row dark text-center">
+
+    <div class="col-12">
+        <h3 class="heading">Proste w uzyciu</h3>
+        <div class="heading-underline"></div>
+    </div>
+
+    <div class="col-md-4">
+        <!-- <h3></h3> -->
+        <div class="feature">
+            <i class="fas fa-male fa-3x"></i>
+        </div>
+        <p class="lead">dla starszych</p>
+    </div>
+
+    <div class="col-md-4">
+        <!-- <h3></h3> -->
+        <div class="feature">
+            <i class="fas fa-male fa-3x"></i>
+        </div>
+        <p class="lead">mlodszych</p>
+    </div>
+
+    <div class="col-md-4">
+        <!-- <h3></h3> -->
+        <div class="feature">
+            <i class="fas fa-male fa-3x"></i>
+        </div>
+        <p class="lead">i tych po srodku</p>
+    </div>
+
+</div> <!-- End Row Dark -->
+
+
+    <div class="fixed-wrap">
+        <div class="fixed">
+        </div>
+    </div>
+
+</div> <!-- End fixed background section -->
+
+</div> <!-- End Resources Section -->
+
+<!-- Start Clients Secion -->
+<div id="clients" class="offset">
+
+<!-- Start Jumbotrone -->
+<div class="jumbotron">
+
+    <div class="col-12">
+        <h3 class="heading">Clients</h3>
+        <div class="heading-underline"></div>
+    </div>
+
+    <div class="row">
+        
+        <div class="col-md-6 clients">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="static/logo.png">
+            </div>
+            <div class="col-md-8">
+                <blockquote>
+                    <i class="fas fa-quote-right"></i>
+                    cos tam cos tam
+                    <hr class="clients-hr">
+                    <cite>&#8212; Pawel rozplochowski</cite>
+                </blockquote>
+            </div>
+        </div>
+        </div>
+
+        <div class="col-md-6 clients">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="static/logo.png">
+                </div>
+                <div class="col-md-8">
+                    <blockquote>
+                        <i class="fas fa-quote-right"></i>
+                        cos tam cos tam2
+                        <hr class="clients-hr">
+                        <cite>&#8212; Pawel rozplochowski2</cite>
+                    </blockquote>
+                </div>
+            </div>
+            </div>
+
+    </div> <!--End Row-->
+
+</div> <!-- End Jumbotrone -->
+
+    <!-- <div class="col-12 narrow text-center">
+        <p class="lead">zarejestruj sie juz dzis</p>
+        <a class="btn btn-secondary btn-md" href="#" target="_blank">
+            Bootstrap Course</a>
+    </div> -->
+</div> <!-- End clients Section -->
+
+<!-- Start Contact Secion -->
+<div id="contact" class="offset">
+
+<footer>
+<div class="row justify-content-center">
+
+    <div class="col-md-5 text-center">
+        <img src="static/logo.png">
+        <p>cos tam cos tam</p>
+        <strong>Contact info</strong>
+        <p>(123 123 123<br>email@gmail.com</p>
+        <a href="#" target="_blank"><i class="fab fa-twitter-square"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-facebook-square"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
+
+    <hr class="socket">
+    &copy; Pomocnik Profesora
+</div>
+</footer>
+
+</div>
+
+<!-- End contact Section -->
+
+
+
+
+    <!-- style="background-image: url("static/wallpaper.jpeg");" -->
+    <!-- {% block navbar %}
+        <nav class="navbar fixed-top navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">
+                <img src="{{ url_for("static", filename="logo.png") }}" width="30" height="30" class="d-inline-block align-top" alt="">
+                Pomocnik Profesora
+            </a>
+        </nav>
+    {% endblock navbar %}
+      -->
+    <!-- {% block content %}
+        
+    {% endblock %} -->
+
+
+</body>
+</html>

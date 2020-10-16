@@ -7,7 +7,7 @@ import uuid
 engine = create_engine('sqlite:///database.db', echo=True)
  
 app = Flask(__name__)
-
+bootstrap = Bootstrap(app)
 @app.route("/")
 def index():
     return render_template("layout.html")
