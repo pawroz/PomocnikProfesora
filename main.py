@@ -5,7 +5,7 @@ from flask_bootstrap import Bootstrap
 import uuid
 from flask_sqlalchemy import SQLAlchemy
  
-engine = create_engine('sqlite:///database.db', echo=True)
+#engine = create_engine('sqlite:///database.db', echo=True)
  
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
