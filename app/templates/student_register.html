@@ -5,7 +5,7 @@
 
 
 {% block name_form %}
-    {% block page_content %}
+    {% block page_contentasdTEGONIEMUSIBYC %}
     <div class="page-header">
         <h1>Hello, {% if name %}{{ name }}{% else %}StrangerPP{% endif %}!</h1>
         {% if not known %}
@@ -15,7 +15,7 @@
         {% endif %}
     </div>
     {{ wtf.quick_form(form) }}
-    {% endblock %}
-{% endblock %}
+    {% endblock page_contentasdTEGONIEMUSIBYC %}
+{% endblock name_form%}
 
 
