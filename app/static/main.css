@@ -48,6 +48,11 @@ body{
     z-index: 1;
     color: white;
     text-transform: uppercase;
+    /* text-align: center; */
+}
+.center_div{
+    margin: 0 auto;
+    width:20%; /* value of your choice which suits your alignment */
 }
 .caption h1{
     font-size: 3.0rem;
