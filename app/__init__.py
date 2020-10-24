@@ -31,5 +31,11 @@ def create_app(config_name):
     from .user import user as user_blueprint
     app.register_blueprint(user_blueprint)
 
+    from .dashboard.student import student as student_blueprint
+    app.register_blueprint(student_blueprint)
+
+    from .dashboard.teacher import teacher as teacher_blueprint
+    app.register_blueprint(teacher_blueprint)
+
     return app
 
