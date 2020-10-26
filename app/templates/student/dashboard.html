@@ -7,10 +7,12 @@
 {% block dashboardStudent_form %}
         <h1>student</h1>
     <div class="center_div  ">
+      <form method = "post">
         {% for user in users %}
-      <p>{{ user.username }} </p>
-  {% endfor %}
-    </div>
+        <p>{{ user.username }}</p>
+        <button type="submit" value="{{ user.email }}" name="email">Example</button>
+        {% endfor %}
+    </div>  
 {% endblock dashboardStudent_form %}
 
 

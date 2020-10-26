@@ -33,3 +33,15 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return '<User %r>' % self.username
+
+class Entry(db.Model):
+    __tablename__ = 'entries'
+    id = db.Column(db.Integer, primary_key=True)
+    student_email = db.Column(db.String(64), index= True)
+    teacher_email = db.Column(db.String(64), index= True)
+    date = db.Column(db.String(64), index= True)
+    hour = db.Column(db.String(64), index= True)
+    reason = db.Column(db.String(64), index= True)
+
+    def __repr__(self):
+        return '<Entry %r>' % self.id

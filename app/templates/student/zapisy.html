@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} Zapisy {% endblock %}
+
+
+{% block name_form %}
+<div class="captionForms text-center">
+        <h1>Zapisy</h1>
+    <div class="center_div ">
+        {{ wtf.quick_form(form) }}
+    </div>
+</div>
+{% endblock %}
