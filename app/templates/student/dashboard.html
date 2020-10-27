@@ -24,6 +24,9 @@
                     {% endif %} 
                 </li>
                 <li class="nav-item">
+                  <a class="nav-link" href="{{ url_for('student.results') }}">Odpowiedz</a>
+              </li>
+                <li class="nav-item">
                     <a class="nav-link" href="#features">Informacje</a>
                 </li>
                 <li class="nav-item">
@@ -61,7 +64,11 @@
           <td>{{ user.username }}</td>
           <td>{{ user.username }}</td>
           <td>{{ user.email }}</td>
-          <td><button type="submit" class="btn btn-outline-light btn-lg" value="{{ user.email }}" name="email">Zapisz</button></td>
+          <td>
+            <form method = "post"> 
+              <button type="submit" class="btn btn-outline-light btn-lg" value="{{ user.email }}" name="email">Zapisz</button>
+            </form>
+          </td>
         </tr>
         
         {% endfor %}

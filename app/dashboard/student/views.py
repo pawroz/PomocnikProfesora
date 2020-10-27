@@ -1,6 +1,6 @@
 from flask import render_template, redirect, request, url_for, flash, session
 from flask_login import login_user, logout_user, login_required
-from ...models import User, Permission, Entry
+from ...models import User, Permission, Entry, Decision
 from . import student
 from .forms import ZapisyForm
 from ... import db
@@ -23,8 +23,17 @@ def zapisy():
         teacher_email = session['teacher_email'],
         date = form.date.data,
         hour = form.hour.data,
-        reason = form.reason.data)
+        reason = form.reason.data,
+        decision = Decision.DEFAULT)
         print("DUPA")
         db.session.add(entry)
         db.session.commit()
     return render_template('student/zapisy.html', form=form)
+
+
+@student.route('/resultsStudent', methods=['GET', 'POST'])
+def results():
+    entries = Entry.query.filter_by(student_email = session['student_email'])
+    print(entries)
+    print(session['student_email'])
+    return render_template('student/results.html', entries=entries)

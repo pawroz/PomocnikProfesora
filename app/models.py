@@ -7,6 +7,10 @@ class Permission():
     STUDENT = 1
     TEACHER = 2
 
+class Decision():
+    DEFAULT = 0
+    ACCEPT = 1
+    DECLINE = 2
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
@@ -42,6 +46,7 @@ class Entry(db.Model):
     date = db.Column(db.String(64), index= True)
     hour = db.Column(db.String(64), index= True)
     reason = db.Column(db.String(64), index= True)
+    decision = db.Column(db.Integer, index= True)
 
     def __repr__(self):
         return '<Entry %r>' % self.id

@@ -23,6 +23,7 @@
                     <a class="nav-link" href="{{ url_for('user.login') }}">Zaloguj sie</a>
                     {% endif %} 
                 </li>
+                
                 <li class="nav-item">
                     <a class="nav-link" href="#features">Informacje</a>
                 </li>
@@ -39,7 +40,7 @@
 
 
 {% block dashboardStudent_form %}
-        <h1>teacher</h1>
+        <h1>student</h1>
         <table class="table table-bordered">
             <thead>
               <tr>
@@ -60,15 +61,19 @@
                 <td>{{ entry.date }} {{ entry.hour }} </td>
                 <td>{{ entry.reason }}</td>
                 <td>
-                  <form method = "post">
-                    <button type="submit" class="btn btn-outline-light btn-lg" value="{{ entry.id }}" name="accept">Zaakceptuj</button>
-                    <button type="submit" class="btn btn-outline-light btn-lg" value="{{ entry.id }}" name="decline">Odmow</button>
-                </form>
+                  {% if entry.decision == 1 %}
+                    <a>Zaakceptowano</a>
+                {% elif entry.decision == 2 %}
+                    <a>Odmowa</a>
+                {% else %}
+                    <a>Oczekujace</a>
+                {% endif %}
                 </td>
               </tr>
               </tbody>
-        </table>
               {% endfor %}
+        </table>
+            
 {% endblock dashboardStudent_form %}
 
 
