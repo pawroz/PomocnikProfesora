@@ -19,14 +19,15 @@ def login():
             next = request.args.get('next')
             if next is None or not next.startswith('/'):
                 if user.permission == Permission.STUDENT:
+                    session['student_email'] = form.email.data
                     next = url_for('student.dashboard')
                     print('student')
                 elif user.permission == Permission.TEACHER:
+                    session['teacher_email'] = form.email.data
                     next = url_for('teacher.dashboard')
                     print('prowadzacy')
                 else:
                     next = url_for('main.index')
-                session['email'] = form.email.data
             return redirect(next)
         flash('Invalid email or password.')
     return render_template('user/login.html', form=form)
@@ -72,3 +73,4 @@ def teacher_register():
         # flash('A confirmation email has been sent to you by email.')
         return redirect(url_for('main.index'))
     return render_template('user/register.html', form=form)
+

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %} Login {% endblock %}
+{% block title %} Zapisy {% endblock %}
 
 {% block navbar %}
 <!-- Navigation -->
@@ -24,9 +24,6 @@
                     {% endif %} 
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{{ url_for('student.results') }}">Odpowiedz</a>
-              </li>
-                <li class="nav-item">
                     <a class="nav-link" href="#features">Informacje</a>
                 </li>
                 <li class="nav-item">
@@ -40,40 +37,11 @@
     </nav><!-- End Navigation -->
 {% endblock navbar%}
 
-{% block dashboardStudent_form %}
-        <h1>student</h1>
-    <!-- <div class="center_div  ">
-      <form method = "post">
-        {% for user in users %}
-        <p>{{ user.username }}</p>
-        <button type="submit" value="{{ user.email }}" name="email">Example</button>
-        {% endfor %}
-    </div> -->
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th scope="col">Imie</th>
-          <th scope="col">Nazwisko</th>
-          <th scope="col">Email</th>
-          <th scope="col">Zapisz sie</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for user in users %}
-        <tr>
-          <td>{{ user.username }}</td>
-          <td>{{ user.username }}</td>
-          <td>{{ user.email }}</td>
-          <td>
-            <form method = "post"> 
-              <button type="submit" class="btn btn-outline-light btn-lg" value="{{ user.email }}" name="email">Zapisz</button>
-            </form>
-          </td>
-        </tr>
-        
-        {% endfor %}
-      </tbody>
-    </table>
-{% endblock dashboardStudent_form %}
-
-
+{% block name_form %}
+<div class="captionForms text-center">
+        <h1>Wypelnij formularz</h1>
+    <div class="center_div ">
+        {{ wtf.quick_form(form) }}
+    </div>
+</div>
+{% endblock %}

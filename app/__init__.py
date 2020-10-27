@@ -37,5 +37,6 @@ def create_app(config_name):
     from .dashboard.teacher import teacher as teacher_blueprint
     app.register_blueprint(teacher_blueprint)
 
+
     return app
 
