@@ -38,7 +38,7 @@ body{
 
 /*============= Landing Page =============*/
 .home-inner{
-    background-image: url('wallpaper.jpeg');
+    background-image: url('chalkboard.jpg');
 }
 .caption{
     width: 100%;
@@ -139,7 +139,7 @@ h3.heading{
 
 /*============= Resources SECTION =============*/
 .fixed{
-    background-image: url(wallpaper.jpeg);
+    background-image: url('chalkboard.jpg');
     z-index: -1;
 }
 .dark{
@@ -235,6 +235,12 @@ hr.socket{
     color: white;
     text-transform: uppercase;
     /* text-align: center; */
+}
+
+/*============= Table Student =============*/
+
+.table{
+    color:white;
 }
 
 /*============ BOOTSTRAP BREAK POINTS:
