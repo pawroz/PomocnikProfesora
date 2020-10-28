@@ -6,15 +6,15 @@
 {% block navbar %}
 <!-- Navigation -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="{{ url_for('teacher.dashboard') }}"><img src="static/logo.png"></a>
+        <a class="navbar-brand" href="/"><img src="static/logo.png"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-            <span class="navbar-toggler-icon" data-toggle="collapse"></span>
+            <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('teacher.dashboard') }}">Strona glowna</a>
+                    <a class="nav-link" href="{{ url_for('student.dashboard') }}">Zapisy</a>
                 </li>
                 <li class="nav-item">
                     {% if current_user.is_authenticated %}
@@ -23,7 +23,6 @@
                     <a class="nav-link" href="{{ url_for('user.login') }}">Zaloguj sie</a>
                     {% endif %} 
                 </li>
-                
                 <li class="nav-item">
                     <a class="nav-link" href="#features">Informacje</a>
                 </li>
@@ -38,9 +37,10 @@
     </nav><!-- End Navigation -->
 {% endblock navbar%}
 
-
-{% block dashboardStudent_form %}
+{% block name_form %}
+    <div class="captionForms text-center">
         <h1>student</h1>
+
         <table class="table table-bordered">
             <thead>
               <tr>
@@ -55,10 +55,10 @@
             <tbody>
               {% for entry in entries %}
               <tr>
-                <td>{{ entry.student_email }}</td>
-                <td>{{ entry.student_email }}</td>
-                <td>{{ entry.student_email }}</td>
-                <td>{{ entry.date }} {{ entry.hour }} </td>
+                <td>{{ entry.teacher_name }}</td>
+                <td>{{ entry.teacher_surname }}</td>
+                <td>{{ entry.teacher_email }}</td>
+                <td>{{ entry.date }} {{ entry.time }}-{{ entry.end_time }}</td>
                 <td>{{ entry.reason }}</td>
                 <td>
                   {% if entry.decision == 1 %}
@@ -74,6 +74,9 @@
               {% endfor %}
         </table>
             
-{% endblock dashboardStudent_form %}
 
+
+
+    </div>
+{% endblock %}
 

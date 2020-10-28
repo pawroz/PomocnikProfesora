@@ -37,6 +37,7 @@ body{
 } 
 
 /*============= Landing Page =============*/
+
 .home-inner{
     background-image: url('chalkboard.jpg');
 }
@@ -236,12 +237,21 @@ hr.socket{
     text-transform: uppercase;
     /* text-align: center; */
 }
+.captionForms h1{
+    padding-bottom: 3rem;
+    padding-top: 3rem;
+}
+
+.datetime-input-edit-wrapper{
+    text-align: center;
+}
 
 /*============= Table Student =============*/
 
 .table{
     color:white;
 }
+
 
 /*============ BOOTSTRAP BREAK POINTS:
 

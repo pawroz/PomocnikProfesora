@@ -44,8 +44,12 @@ def logout():
 def student_register():
     form = StudentRegistrationForm()
     if form.validate_on_submit():
-        user = User(email=form.email.data.lower(),
-                    username=form.username.data,
+        user = User(name=form.name.data.lower(),
+                    surname=form.surname.data.lower(),
+                    date="",
+                    time="",
+                    end_time="",
+                    email=form.email.data.lower(),
                     password=form.password.data,
                     permission=Permission.STUDENT)
         db.session.add(user)
@@ -61,10 +65,15 @@ def student_register():
 def teacher_register():
     form = TeacherRegistrationForm()
     if form.validate_on_submit():
-        user = User(email=form.email.data.lower(),
-                    username=form.username.data,
+        user = User(name=form.name.data.lower(),
+                    surname=form.surname.data.lower(),
+                    date=str(form.date.data),
+                    time=str(form.time.data),
+                    end_time=str(form.end_time.data),
+                    email=form.email.data.lower(),
                     password=form.password.data,
                     permission=Permission.TEACHER)
+        print(str(form.time.data))
         db.session.add(user)
         db.session.commit()
         # token = user.generate_confirmation_token()

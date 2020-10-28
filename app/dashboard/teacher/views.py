@@ -19,6 +19,8 @@ def dashboard():
             entry = Entry.query.filter_by(id=id).first()
             entry.decision = Decision.DECLINE
             db.session.commit()
-    entries = Entry.query.filter_by(teacher_email=session['teacher_email'])
+    entries = Entry.query.filter_by(teacher_email=session['teacher_email'],
+    student_name = session['student_email'])
     return render_template('teacher/dashboard.html', entries=entries)
+
     

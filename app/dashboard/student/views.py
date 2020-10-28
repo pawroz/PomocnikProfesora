@@ -8,7 +8,7 @@ from ... import db
 
 @student.route('/dashboardStudent', methods=['GET', 'POST'])
 def dashboard():
-    if request.method == 'POST':
+    if request.method == 'POST': 
         session['teacher_email'] = request.form['email']
         return redirect(url_for('student.zapisy'))
     users = User.query.filter_by(permission=Permission.TEACHER)
@@ -17,17 +17,28 @@ def dashboard():
 @student.route('/zapisy', methods =['GET', 'POST'])
 def zapisy():
     form = ZapisyForm()
-    print(session['teacher_mail'])
+    print(session['teacher_email'])
+    print(session['student_email'] + "DUPA")
+    print(User.query.filter_by(email=session['student_email']).first())
+    
     if form.validate_on_submit():
+        teacher = User.query.filter_by(email=session['teacher_email']).first()
+        student = User.query.filter_by(email=session['student_email']).first()
         entry = Entry(student_email = session['student_email'],
         teacher_email = session['teacher_email'],
-        date = form.date.data,
-        hour = form.hour.data,
+        student_name = session['student_email'],
+        # student_surname = student.student_surname,
+        # teacher_name = teacher.teacher_name,
+        # teacher_surname = teacher.teacher_surname,
+        date = teacher.date,
+        time = teacher.time,
+        end_time = teacher.end_time,
         reason = form.reason.data,
         decision = Decision.DEFAULT)
         print("DUPA")
         db.session.add(entry)
         db.session.commit()
+        return redirect(url_for('student.dashboard'))
     return render_template('student/zapisy.html', form=form)
 
 

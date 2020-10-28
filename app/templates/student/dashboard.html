@@ -40,8 +40,10 @@
     </nav><!-- End Navigation -->
 {% endblock navbar%}
 
-{% block dashboardStudent_form %}
-        <h1>student</h1>
+{% block name_form %}
+  <div class="captionForms text-center">
+    <h1>student</h1>
+        
     <!-- <div class="center_div  ">
       <form method = "post">
         {% for user in users %}
@@ -55,15 +57,17 @@
           <th scope="col">Imie</th>
           <th scope="col">Nazwisko</th>
           <th scope="col">Email</th>
+          <th scope="col">Data</th>
           <th scope="col">Zapisz sie</th>
         </tr>
       </thead>
       <tbody>
         {% for user in users %}
         <tr>
-          <td>{{ user.username }}</td>
-          <td>{{ user.username }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.surname }}</td>
           <td>{{ user.email }}</td>
+          <td>{{ user.date }} {{ user.time }}-{{ user.end_time}}</td>
           <td>
             <form method = "post"> 
               <button type="submit" class="btn btn-outline-light btn-lg" value="{{ user.email }}" name="email">Zapisz</button>
@@ -74,6 +78,7 @@
         {% endfor %}
       </tbody>
     </table>
-{% endblock dashboardStudent_form %}
+  </div>
+{% endblock %}
 
 
