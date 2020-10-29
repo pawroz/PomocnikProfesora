@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %} Login {% endblock %}
+{% block title %} Pomocnik Profesora {% endblock %}
 
 {% block navbar %}
 <!-- Navigation -->
@@ -38,14 +38,16 @@
 {% endblock navbar%}
 
 
-{% block dashboardStudent_form %}
-        <h1>teacher</h1>
+{% block name_form %}
+  <div class="captionForms text-center">
+    <h1>Witaj {{ teacher_name }}</h1>
+    <h3>Oto lista zapisanych do Ciebie studentow</h3>
         <table class="table table-bordered">
             <thead>
               <tr>
-                <th scope="col">Imie</th>
-                <th scope="col">Nazwisko</th>
-                <th scope="col">Email</th>
+                <th scope="col">Imie Studenta</th>
+                <th scope="col">Nazwisko Studenta</th>
+                <th scope="col">Email Studenta</th>
                 <th scope="col">Data</th>
                 <th scope="col">Powod</th>
                 <th scope="col">Decyzja</th>
@@ -54,21 +56,29 @@
             <tbody>
               {% for entry in entries %}
               <tr>
+                <td>{{ entry.student_name }}</td>
+                <td>{{ entry.student_surname }}</td>
                 <td>{{ entry.student_email }}</td>
-                <td>{{ entry.student_email }}</td>
-                <td>{{ entry.student_email }}</td>
-                <td>{{ entry.date }} {{ entry.hour }} </td>
+                <td>{{ entry.date }} {{ entry.time }}-{{ entry.end_time }} </td>
                 <td>{{ entry.reason }}</td>
                 <td>
-                  <form method = "post">
-                    <button type="submit" class="btn btn-outline-light btn-lg" value="{{ entry.id }}" name="accept">Zaakceptuj</button>
-                    <button type="submit" class="btn btn-outline-light btn-lg" value="{{ entry.id }}" name="decline">Odmow</button>
-                </form>
+                    {% if entry.decision == 1 %}
+                        <a>Zaakceptowano</a>
+                    {% elif entry.decision == 2 %}
+                        <a>Odmowa</a>
+                    {% else %}
+                    <form method = "post">
+                        <button type="submit" class="btn btn-outline-light btn-lg" value="{{ entry.id }}" name="accept">Zaakceptuj</button>
+                        <button type="submit" class="btn btn-outline-light btn-lg" value="{{ entry.id }}" name="decline">Odmow</button>
+                    </form>
+                    {% endif %}
                 </td>
               </tr>
               </tbody>
-        </table>
               {% endfor %}
-{% endblock dashboardStudent_form %}
+        </table>
+
+  </div>
+  {% endblock name_form%}
 
 
