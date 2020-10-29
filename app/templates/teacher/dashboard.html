@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %} Login {% endblock %}
+{% block title %} Pomocnik Profesora {% endblock %}
 
 {% block navbar %}
 <!-- Navigation -->
@@ -40,7 +40,8 @@
 
 {% block name_form %}
   <div class="captionForms text-center">
-    <h1>teacher</h1>
+    <h1>Witaj {{ teacher_name }}</h1>
+    <h3>Oto lista zapisanych do Ciebie studentow</h3>
         <table class="table table-bordered">
             <thead>
               <tr>

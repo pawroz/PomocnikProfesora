@@ -12,7 +12,8 @@ def dashboard():
         session['teacher_email'] = request.form['email']
         return redirect(url_for('student.zapisy'))
     users = User.query.filter_by(permission=Permission.TEACHER)
-    return render_template('student/dashboard.html', users=users)
+    user = User.query.filter_by(email=session['student_email']).first()
+    return render_template('student/dashboard.html', users=users, user_name=user.name)
 
 @student.route('/zapisy', methods =['GET', 'POST'])
 def zapisy():
@@ -27,9 +28,9 @@ def zapisy():
         entry = Entry(student_email = session['student_email'],
         teacher_email = session['teacher_email'],
         student_name = session['student_email'],
-        # student_surname = student.student_surname,
-        # teacher_name = teacher.teacher_name,
-        # teacher_surname = teacher.teacher_surname,
+        student_surname = student.surname,
+        teacher_name = teacher.name,
+        teacher_surname = teacher.surname,
         date = teacher.date,
         time = teacher.time,
         end_time = teacher.end_time,
@@ -44,7 +45,7 @@ def zapisy():
 
 @student.route('/resultsStudent', methods=['GET', 'POST'])
 def results():
-    entries = Entry.query.filter_by(student_email = session['student_email'])
+    entries = Entry.query.filter_by(student_email=session['student_email'])
     print(entries)
     print(session['student_email'])
     return render_template('student/results.html', entries=entries)

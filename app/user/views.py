@@ -11,9 +11,6 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data.lower()).first()
-        print("---------------------")
-        print(user.permission)
-        print("---------------------")
         if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
             next = request.args.get('next')
@@ -28,8 +25,9 @@ def login():
                     print('prowadzacy')
                 else:
                     next = url_for('main.index')
+                    flash('Nieprawidlowa nazwa uzytkownika lub haslo')
             return redirect(next)
-        flash('Invalid email or password.')
+        
     return render_template('user/login.html', form=form)
 
 
@@ -37,7 +35,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    flash('You have been logged out.')
+    flash('Zostales wylogowany')
     return redirect(url_for('main.index'))
 
 @user.route('/student_register', methods=['GET', 'POST'])
@@ -80,6 +78,6 @@ def teacher_register():
         # send_email(user.email, 'Confirm Your Account',
         #            'auth/email/confirm', user=user, token=token)
         # flash('A confirmation email has been sent to you by email.')
-        return redirect(url_for('main.index'))
+        return render_template('base.html')
     return render_template('user/register.html', form=form)
 
