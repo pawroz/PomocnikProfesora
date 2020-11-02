@@ -19,7 +19,7 @@ def dashboard():
 def zapisy():
     form = ZapisyForm()
     print(session['teacher_email'])
-    print(session['student_email'] + "DUPA")
+    print(session['student_email'])
     print(User.query.filter_by(email=session['student_email']).first())
     
     if form.validate_on_submit():
