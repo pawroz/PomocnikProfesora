@@ -14,7 +14,7 @@
 You can get extra lesson in youre school or university, if u have any problem in subject or want to be better then you were yesterday!
 
 ## Screenshots
-![Example screenshot](./images/screenshot.png)
+![Example screenshot](./images/123584955_4037319149616248_4941042612904498194_n.png)
 
 ## Technologies
 * Python
