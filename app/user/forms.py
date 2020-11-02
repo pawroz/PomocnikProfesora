@@ -13,34 +13,32 @@ class LoginForm(FlaskForm):
 class TeacherRegistrationForm(FlaskForm):
     name = StringField('Imie', validators=[
         DataRequired(), Length(1, 64),
-        Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0, 'Usernames must have only letters, numbers, dots or underscores')])
-    surname = StringField('Surname', validators=[
+        Regexp('^[A-Za-z][A-Za-z_.]*$', 0, 'Imie musi miec tylko litery')])
+    surname = StringField('Nzwisko', validators=[
         DataRequired(), Length(1, 64),
-        Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0, 'Usernames must have only letters, numbers, dots or underscores')])
-    date = DateField('Date',format='%Y-%m-%d', default=datetime.now())
+        Regexp('^[A-Za-z][A-Za-z_.]*$', 0, 'Nzwisko musi miec tylko litery')])
+    date = DateField('Termin',format='%Y-%m-%d', default=datetime.now())
     time = TimeField('Poczatek spotkania',format='%H:%M', default=datetime.now())
     end_time = TimeField('Koniec spotkania',format='%H:%M', default=datetime.now())
     email = StringField('Email', validators=[DataRequired(), Length(1, 64), Email()])
-    password = PasswordField('Password', validators=[
+    password = PasswordField('Haslo', validators=[
         DataRequired(), EqualTo('password2', message='Passwords must match.')])
-    password2 = PasswordField('Confirm password', validators=[DataRequired()])
+    password2 = PasswordField('Powtorz haslo', validators=[DataRequired()])
     secret = PasswordField('Secret', validators=[DataRequired(), Regexp('^ABCD1234$', 0, 'Must provide valid secret!')])
     submit = SubmitField('Register')
 
 class StudentRegistrationForm(FlaskForm):
     name = StringField('Imie', validators=[
         DataRequired(), Length(1, 64),
-        Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0, 'Usernames must have only letters, numbers, dots or underscores')])
-    surname = StringField('Username', validators=[
+        Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0, 'Imie musi miec tylko litery')])
+    surname = StringField('Nzwisko', validators=[
         DataRequired(), Length(1, 64),
-        Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
-               'Usernames must have only letters, numbers, dots or '
-               'underscores')])
+        Regexp('^[A-Za-z][A-Za-z_.]*$', 0, 'Nzwisko musi miec tylko litery')])
     email = StringField('Email', validators=[DataRequired(), Length(1, 64), Email()])
-    password = PasswordField('Password', validators=[
-        DataRequired(), EqualTo('password2', message='Passwords must match.')])
-    password2 = PasswordField('Confirm password', validators=[DataRequired()])
-    submit = SubmitField('Register')
+    password = PasswordField('Haslo', validators=[
+        DataRequired(), EqualTo('password2', message='Hasla nie sa indentyczne')])
+    password2 = PasswordField('Powtorz haslo', validators=[DataRequired()])
+    submit = SubmitField('Zarejestruj')
 
 
 

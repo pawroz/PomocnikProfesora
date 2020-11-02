@@ -23,11 +23,8 @@ def login():
                     session['teacher_email'] = form.email.data
                     next = url_for('teacher.dashboard')
                     print('prowadzacy')
-                else:
-                    next = url_for('main.index')
-                    flash('Nieprawidlowa nazwa uzytkownika lub haslo')
             return redirect(next)
-        
+        flash('Nieprawidlowa nazwa uzytkownika lub haslo')
     return render_template('user/login.html', form=form)
 
 
