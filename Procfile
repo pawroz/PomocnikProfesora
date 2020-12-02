@@ -1,1 +1,1 @@
-web: gunicorn app.PomocnikProfesora:app
+web: gunicorn PomocnikProfesora:app
