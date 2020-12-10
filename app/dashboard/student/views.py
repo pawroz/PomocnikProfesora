@@ -4,6 +4,7 @@ from ...models import User, Permission, Entry, Decision
 from . import student
 from .forms import ZapisyForm
 from ... import db
+import requests
 
 
 @student.route('/dashboardStudent', methods=['GET', 'POST'])
@@ -18,10 +19,21 @@ def dashboard():
 @student.route('/zapisy', methods =['GET', 'POST'])
 def zapisy():
     form = ZapisyForm()
-    print(session['teacher_email'])
-    print(session['student_email'])
-    print(User.query.filter_by(email=session['student_email']).first())
+    # print(session['teacher_email'])
+    # print(session['student_email'])
+    # print(User.query.filter_by(email=session['student_email']).first())
+
+    login = request.args.get('login')
+    roomId = request.args.get('roomId')
+    loginUrlResult = requests.post('http://localhost/Projekt-inzynierski/API/UsersByLogin.php?login={}'.format(login))
+    roomIdUrlResult = requests.post('http://localhost/Projekt-inzynierski/API/UsersByRoom.php?roomId={}'.format(roomId))
+    try:
+        print(loginUrlResult.json()["email"])
+        print(roomIdUrlResult.json()["login"])
+    except:
+        print("roomId or login wrong")
     
+    # Change session variables to fit requirenments of provided API :)
     if form.validate_on_submit():
         teacher = User.query.filter_by(email=session['teacher_email']).first()
         student = User.query.filter_by(email=session['student_email']).first()
