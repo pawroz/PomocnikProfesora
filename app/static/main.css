@@ -40,6 +40,8 @@ body{
 
 .home-inner{
     background-image: url('chalkboard.jpg');
+    /* background-repeat: repeat; */
+    background-size:cover;
 }
 .caption{
     width: 100%;

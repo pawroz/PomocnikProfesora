@@ -28,12 +28,25 @@ def zapisy():
     loginUrlResult = requests.post('http://localhost/Projekt-inzynierski/API/UsersByLogin.php?login={}'.format(login))
     roomIdUrlResult = requests.post('http://localhost/Projekt-inzynierski/API/UsersByRoom.php?roomId={}'.format(roomId))
     try:
-        print(loginUrlResult.json()["email"])
-        print(roomIdUrlResult.json()["login"])
+        teacherJson = roomIdUrlResult.json()
+        studentJson = loginUrlResult.json()
     except:
         print("roomId or login wrong")
-    #TODO data from roomName cant download correctly
-    # Change session variables to fit requirenments of provided API :)
+    if User.query.filter_by(email=studentJson['email']).first() is None:
+        user = User(name=studentJson['name'],
+                    surname=studentJson['surname'],
+                    date="",
+                    time="",
+                    end_time="",
+                    email=studentJson['email'],
+                    password='',
+                    permission=Permission.STUDENT)
+        db.session.add(user)
+        db.session.commit()  
+    else:
+        print("istnieje")      
+
+
     if form.validate_on_submit():
         teacher = User.query.filter_by(email=roomIdUrlResult.json()["login"]).first()
         student = User.query.filter_by(email=loginUrlResult.json()["email"]).first()

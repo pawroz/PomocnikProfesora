@@ -3,10 +3,25 @@ from flask_login import login_user, logout_user, login_required
 from ...models import User, Permission, Entry, Decision
 from ... import db
 from . import teacher
-
+from ...user.forms import TeacherRegistrationForm
+import requests
 
 @teacher.route('/dashboardTeacher', methods=['GET', 'POST'])
 def dashboard():
+    form = TeacherRegistrationForm()
+    login = request.args.get('login')
+    loginUrlResult = requests.post('http://localhost/Projekt-inzynierski/API/UsersByLogin.php?login={}'.format(login))
+
+    try:
+        userJson = loginUrlResult.json()
+    except:
+        print("login wrong")
+
+    if User.query.filter_by(email=userJson['email']).first() is None:
+        return render_template('user/register.html', form=form)
+    else:
+        print("istnieje")
+
     if request.method == 'POST':
         if request.form.get("accept"):
             id = request.form['accept']
