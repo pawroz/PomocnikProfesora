@@ -1,4 +1,4 @@
 {
-    "python.pythonPath": "/home/pawel/Desktop/Projects/PomocnikProfesora/venv/bin/python3",
+    "python.pythonPath": "E:\\Python3\\python.exe",
     "python.linting.pylintArgs": ["--load-plugins", "pylint_flask_sqlalchemy", "pylint_flask"]
 }

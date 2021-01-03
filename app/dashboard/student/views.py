@@ -9,10 +9,21 @@ import requests
 
 @student.route('/dashboardStudent', methods=['GET', 'POST'])
 def dashboard():
+    login = request.args.get('login')
+    roomId = request.args.get('roomId')
+    loginUrlResult = requests.post('http://localhost/Projekt-inzynierski/API/UsersByLogin.php?login={}'.format(login))
+    roomIdUrlResult = requests.post('http://localhost/Projekt-inzynierski/API/UsersByRoom.php?roomId={}'.format(roomId))
+    try:
+        teacherJson = roomIdUrlResult.json()
+        studentJson = loginUrlResult.json()
+    except:
+        print("roomId or login wrong")
+    
+    print(teacherJson)
     if request.method == 'POST': 
         session['teacher_email'] = request.form['email']
         return redirect(url_for('student.zapisy'))
-    users = User.query.filter_by(permission=Permission.TEACHER)
+    users = User.query.filter_by(email=teacherJson['email'])
     user = User.query.filter_by(email=session['student_email']).first()
     return render_template('student/dashboard.html', users=users, user_name=user.name)
 

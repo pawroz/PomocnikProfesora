@@ -6,6 +6,13 @@ body{
     color: #505962;
 }
 
+.offset:before{
+    display: block;
+    content: "";
+    height: 4rem;
+    margin-top: -4rem;
+}
+
 /*============= Navigation =============*/
 .navbar{
     text-transform: uppercase;
