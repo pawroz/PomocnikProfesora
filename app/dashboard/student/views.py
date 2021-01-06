@@ -10,11 +10,11 @@ import requests
 @student.route('/dashboardStudent', methods=['GET', 'POST'])
 def dashboard():
     login = request.args.get('login')
-    roomId = request.args.get('roomId')
+    #roomId = request.args.get('roomId')
     loginUrlResult = requests.post('http://localhost/Projekt-inzynierski/API/UsersByLogin.php?login={}'.format(login))
-    roomIdUrlResult = requests.post('http://localhost/Projekt-inzynierski/API/UsersByRoom.php?roomId={}'.format(roomId))
+    #roomIdUrlResult = requests.post('http://localhost/Projekt-inzynierski/API/UsersByRoom.php?roomId={}'.format(roomId))
     try:
-        teacherJson = roomIdUrlResult.json()
+        #teacherJson = roomIdUrlResult.json()
         studentJson = loginUrlResult.json()
     except:
         print("roomId or login wrong")
@@ -57,6 +57,12 @@ def zapisy():
     else:
         print("istnieje")      
 
+    if User.query.filter_by(email=teacherJson['email']).first() is None:
+        print("nie ma prowadzacego")
+        #TODO-zrobic templatke która mówi ze nie ma prowadzącego
+    else:
+        print("chuj")
+        return render_template('404.html')
 
     if form.validate_on_submit():
         teacher = User.query.filter_by(email=roomIdUrlResult.json()["login"]).first()
@@ -67,7 +73,7 @@ def zapisy():
         student_surname = loginUrlResult.json()["surname"],
         teacher_name = roomIdUrlResult.json()["name"],
         teacher_surname = roomIdUrlResult.json()["surname"],
-        date = teacher.date,
+        #date = teacher.date,
         time = teacher.time,
         end_time = teacher.end_time,
         reason = form.reason.data,

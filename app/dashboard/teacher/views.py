@@ -13,11 +13,22 @@ def dashboard():
     loginUrlResult = requests.post('http://localhost/Projekt-inzynierski/API/UsersByLogin.php?login={}'.format(login))
 
     try:
-        userJson = loginUrlResult.json()
+        teacherJson = loginUrlResult.json()
     except:
         print("login wrong")
 
-    if User.query.filter_by(email=userJson['email']).first() is None:
+    if User.query.filter_by(email=teacherJson['email']).first() is None:
+        user = User(name=teacherJson['name'],
+            surname=teacherJson['surname'],
+            date="",
+            time="",
+            end_time="",
+            email=teacherJson['email'],
+            password='',
+            permission=Permission.TEACHER)
+        db.session.add(user)
+        db.session.commit()
+        #TODO- return template form tylko z godziną początek spotkania koniec spotkania zobacz register form teacher
         return render_template('user/register.html', form=form)
     else:
         print("istnieje")
@@ -38,7 +49,7 @@ def dashboard():
 #   student_name = session['student_email']
     user = User.query.filter_by(email=session['teacher_email']).first()
     print(entries)
-    return render_template('teacher/dashboard.html', entries=entries, teacher_name=user.name)
+    return render_template('teacher/dashboard.html', entries=entries)
 
 
     

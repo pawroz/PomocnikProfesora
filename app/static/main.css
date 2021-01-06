@@ -240,6 +240,7 @@ table, thead, tbody, th, td, tr {
 	}
 	td, th {
         text-align: right; 
+        padding: 10px;
     }
 	td:before { 
 		/* Now like a table header */

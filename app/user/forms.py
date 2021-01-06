@@ -11,20 +11,20 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Zaloguj')
 
 class TeacherRegistrationForm(FlaskForm):
-    name = StringField('Imie', validators=[
-        DataRequired(), Length(1, 64),
-        Regexp('^[A-Za-z][A-Za-z_.]*$', 0, 'Imie musi miec tylko litery')])
-    surname = StringField('Nzwisko', validators=[
-        DataRequired(), Length(1, 64),
-        Regexp('^[A-Za-z][A-Za-z_.]*$', 0, 'Nzwisko musi miec tylko litery')])
+    # name = StringField('Imie', validators=[
+    #     DataRequired(), Length(1, 64),
+    #     Regexp('^[A-Za-z][A-Za-z_.]*$', 0, 'Imie musi miec tylko litery')])
+    # surname = StringField('Nzwisko', validators=[
+    #     DataRequired(), Length(1, 64),
+    #     Regexp('^[A-Za-z][A-Za-z_.]*$', 0, 'Nzwisko musi miec tylko litery')])
     date = DateField('Termin',format='%Y-%m-%d', default=datetime.now())
     time = TimeField('Poczatek spotkania',format='%H:%M', default=datetime.now())
     end_time = TimeField('Koniec spotkania',format='%H:%M', default=datetime.now())
-    email = StringField('Email', validators=[DataRequired(), Length(1, 64), Email()])
-    password = PasswordField('Haslo', validators=[
-        DataRequired(), EqualTo('password2', message='Passwords must match.')])
-    password2 = PasswordField('Powtorz haslo', validators=[DataRequired()])
-    secret = PasswordField('Secret', validators=[DataRequired(), Regexp('^ABCD1234$', 0, 'Must provide valid secret!')])
+    # email = StringField('Email', validators=[DataRequired(), Length(1, 64), Email()])
+    # password = PasswordField('Haslo', validators=[
+    #     DataRequired(), EqualTo('password2', message='Passwords must match.')])
+    # password2 = PasswordField('Powtorz haslo', validators=[DataRequired()])
+    # secret = PasswordField('Secret', validators=[DataRequired(), Regexp('^ABCD1234$', 0, 'Must provide valid secret!')])
     submit = SubmitField('Register')
 
 class StudentRegistrationForm(FlaskForm):

@@ -60,12 +60,10 @@ def student_register():
 def teacher_register():
     form = TeacherRegistrationForm()
     if form.validate_on_submit():
-        user = User(date=str(form.date.data),
-                    time=str(form.time.data),
-                    end_time=str(form.end_time.data),
-                    permission=Permission.TEACHER)
-        print(str(form.time.data))
-        db.session.add(user)
+        user = User.query.filter_by(email=session['teacher_email']).first()
+        user.date = str(form.date.data)
+        user.time = str(form.time.data)
+        user.end_time = str(form.end_time.data)
         db.session.commit()
         # token = user.generate_confirmation_token()
         # send_email(user.email, 'Confirm Your Account',
