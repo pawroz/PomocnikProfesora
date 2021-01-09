@@ -6,26 +6,26 @@ from .forms import ZapisyForm
 from ... import db
 import requests
 
-
+# KLASA JAK NA RAZIE NIEPOTRZEBNA 
 @student.route('/dashboardStudent', methods=['GET', 'POST'])
 def dashboard():
     login = request.args.get('login')
-    #roomId = request.args.get('roomId')
+    roomId = request.args.get('roomId')
     loginUrlResult = requests.post('http://localhost/Projekt-inzynierski/API/UsersByLogin.php?login={}'.format(login))
-    #roomIdUrlResult = requests.post('http://localhost/Projekt-inzynierski/API/UsersByRoom.php?roomId={}'.format(roomId))
+    roomIdUrlResult = requests.post('http://localhost/Projekt-inzynierski/API/UsersByRoom.php?roomId={}'.format(roomId))
     try:
-        #teacherJson = roomIdUrlResult.json()
+        teacherJson = roomIdUrlResult.json()
         studentJson = loginUrlResult.json()
     except:
         print("roomId or login wrong")
     
-    print(teacherJson)
+    #print(teacherJson)
     if request.method == 'POST': 
         session['teacher_email'] = request.form['email']
         return redirect(url_for('student.zapisy'))
-    users = User.query.filter_by(email=teacherJson['email'])
-    user = User.query.filter_by(email=session['student_email']).first()
-    return render_template('student/dashboard.html', users=users, user_name=user.name)
+    teacher = User.query.filter_by(email=teacherJson['email']).first()
+    student = User.query.filter_by(email=studentJson['email']).first()
+    return render_template('student/dashboard.html', student=student, teacher=teacher)
 
 @student.route('/zapisy', methods =['GET', 'POST'])
 def zapisy():
@@ -55,17 +55,35 @@ def zapisy():
         db.session.add(user)
         db.session.commit()  
     else:
-        print("istnieje")      
+        print("student istnieje")      
 
     if User.query.filter_by(email=teacherJson['email']).first() is None:
         print("nie ma prowadzacego")
-        #TODO-zrobic templatke która mówi ze nie ma prowadzącego
-    else:
-        print("chuj")
-        return render_template('404.html')
+        return render_template("student/teacherIsNone.html")
+    # else:
+    #     student = User(name=studentJson['name'],
+    #                 surname=studentJson['surname'],
+    #                 date="",
+    #                 time="",
+    #                 end_time="",
+    #                 email=studentJson['email'],
+    #                 password='',
+    #                 permission=Permission.STUDENT)
+    #     teacher = User(name=teacherJson['name'],
+    #         surname=teacherJson['surname'],
+    #         date="",
+    #         time="",
+    #         end_time="",
+    #         email=teacherJson['email'],
+    #         password='',
+    #         permission=Permission.TEACHER)
+    #     print("jest prowadzacy")
+    #     return render_template('student/dashboard.html', student=student, teacher=teacher)
 
+    #TODO: nie ma rubryki date, time - po wypelnieniu formularza nie zapisuje
     if form.validate_on_submit():
         teacher = User.query.filter_by(email=roomIdUrlResult.json()["login"]).first()
+        teacherSession = User.query.filter_by(email=session['teacher_email']).first()
         student = User.query.filter_by(email=loginUrlResult.json()["email"]).first()
         entry = Entry(student_email = loginUrlResult.json()["email"],
         teacher_email = roomIdUrlResult.json()["email"],

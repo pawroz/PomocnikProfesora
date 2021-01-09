@@ -43,7 +43,7 @@
 {% block name_form %}
   <div class="captionForms text-center">
     
-    <h1>Czesc {{ user_name }}</h1>
+    <h1>Czesc {{ student.name }}</h1>
     <h3>Lista Prowadzacych do ktorych mozesz sie zapisac</h3>
     
         
@@ -64,24 +64,21 @@
           <th scope="col">Zapisz sie</th>
         </tr>
       </thead>
+      <h3>{{teacher.name}}</h3>
       <tbody>
-        {% for user in users %}
         <tr>
-          <td>{{ user.name }}</td>
-          <td>{{ user.surname }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.date }} {{ user.time }}-{{ user.end_time}}</td>
-          <td>
-            <form method = "post"> 
-              <button type="submit" class="btn btn-outline-light btn-lg" value="{{ user.email }}" name="email">Zapisz</button>
-            </form>
-          </td>
+          <td>{{ teacher.name }}</td>
+          <td>{{ teacher.surname }}</td>
+          <td>{{ teacher.email }}</td>
+          <td>{{ teacher.date }} {{ teacher.time }}-{{ teacher.end_time}}</td>
+
         </tr>
-        
-        {% endfor %}
       </tbody>
     </table>
   </div>
 {% endblock %}
 
 
+<!-- <td><form method = "post"> 
+  <button type="submit" class="btn btn-outline-light btn-lg" value="{{ user.email }}" name="email">Zapisz</button>
+</form></td> -->

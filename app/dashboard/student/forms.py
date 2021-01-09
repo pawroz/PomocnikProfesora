@@ -5,5 +5,5 @@ from wtforms.validators import DataRequired, Length, Email, Regexp, EqualTo
 
 class ZapisyForm(FlaskForm):
     reason = StringField('Powod', validators=[DataRequired()])
-    submit = SubmitField('Zapisz')
+    submit = SubmitField('Zapisz')  
 

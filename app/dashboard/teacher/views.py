@@ -17,21 +17,26 @@ def dashboard():
     except:
         print("login wrong")
 
+    #TODO: Pobiera date time i end_time z formularza / nie dodaje poprawnie do bazy danych 
+    #  prowadzacy1 = User.query.filter_by(email='student1@wp.pl').first() -> prowadzacy1.date
     if User.query.filter_by(email=teacherJson['email']).first() is None:
         user = User(name=teacherJson['name'],
             surname=teacherJson['surname'],
-            date="",
-            time="",
-            end_time="",
+            date=str(form.date.data),
+            time=str(form.time.data),
+            end_time=str(form.end_time.data),
             email=teacherJson['email'],
             password='',
             permission=Permission.TEACHER)
+        print(str(form.date.data))
+        print(str(form.time.data))
+        print(str(form.end_time.data))
         db.session.add(user)
         db.session.commit()
         #TODO- return template form tylko z godziną początek spotkania koniec spotkania zobacz register form teacher
         return render_template('user/register.html', form=form)
     else:
-        print("istnieje")
+        print("prowadzacy istnieje")
 
     if request.method == 'POST':
         if request.form.get("accept"):
