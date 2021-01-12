@@ -17,10 +17,9 @@ def dashboard():
     except:
         print("login wrong")
 
-    #TODO: Pobiera date time i end_time z formularza / nie dodaje poprawnie do bazy danych 
-    #  prowadzacy1 = User.query.filter_by(email='student1@wp.pl').first() -> prowadzacy1.date
-    if User.query.filter_by(email=teacherJson['email']).first() is None:
-        user = User(name=teacherJson['name'],
+    if request.method == 'POST':
+        if request.form.get("submit"):
+            user = User(name=teacherJson['name'],
             surname=teacherJson['surname'],
             date=str(form.date.data),
             time=str(form.time.data),
@@ -28,28 +27,31 @@ def dashboard():
             email=teacherJson['email'],
             password='',
             permission=Permission.TEACHER)
-        print(str(form.date.data))
-        print(str(form.time.data))
-        print(str(form.end_time.data))
-        db.session.add(user)
-        db.session.commit()
-        #TODO- return template form tylko z godziną początek spotkania koniec spotkania zobacz register form teacher
-        return render_template('user/register.html', form=form)
-    else:
-        print("prowadzacy istnieje")
-
-    if request.method == 'POST':
+            print(str(form.date.data))
+            print(str(form.time.data))
+            print(str(form.end_time.data))
+            db.session.add(user)
+            db.session.commit()
         if request.form.get("accept"):
             id = request.form['accept']
             entry = Entry.query.filter_by(id=id).first()
             entry.decision = Decision.ACCEPT
             db.session.commit()
             print(id)
-        elif request.form.get("decline"):
+        if request.form.get("decline"):
             id = request.form['decline']
             entry = Entry.query.filter_by(id=id).first()
             entry.decision = Decision.DECLINE
             db.session.commit()
+
+    #TODO: Pobiera date time i end_time z formularza / nie dodaje poprawnie do bazy danych 
+    #  prowadzacy1 = User.query.filter_by(email='student1@wp.pl').first() -> prowadzacy1.date
+    if User.query.filter_by(email=teacherJson['email']).first() is None:
+        #TODO- return template form tylko z godziną początek spotkania koniec spotkania zobacz register form teacher
+        return render_template('user/register.html', form=form)
+    else:
+        print("prowadzacy istnieje")
+
     entries = Entry.query.filter_by(teacher_email=session['teacher_email'])
 #   student_name = session['student_email']
     user = User.query.filter_by(email=session['teacher_email']).first()

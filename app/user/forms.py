@@ -18,8 +18,8 @@ class TeacherRegistrationForm(FlaskForm):
     #     DataRequired(), Length(1, 64),
     #     Regexp('^[A-Za-z][A-Za-z_.]*$', 0, 'Nzwisko musi miec tylko litery')])
     date = DateField('Termin',format='%Y-%m-%d', validators=[DataRequired()], default=datetime.now())
-    time = TimeField('Poczatek spotkania',format='%H:%M', validators=[DataRequired()], default=datetime.now())
-    end_time = TimeField('Koniec spotkania',format='%H:%M', validators=[DataRequired()], default=datetime.now())
+    time = TimeField('Poczatek spotkania',format='%H:%M', validators=[DataRequired()])
+    end_time = TimeField('Koniec spotkania',format='%H:%M', validators=[DataRequired()])
     # email = StringField('Email', validators=[DataRequired(), Length(1, 64), Email()])
     # password = PasswordField('Haslo', validators=[
     #     DataRequired(), EqualTo('password2', message='Passwords must match.')])

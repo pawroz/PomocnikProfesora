@@ -81,9 +81,10 @@ def zapisy():
     #     return render_template('student/dashboard.html', student=student, teacher=teacher)
 
     #TODO: nie ma rubryki date, time - po wypelnieniu formularza nie zapisuje
+    #TODO: templatka student dashboard nie przyjmuje w argumentach teacher session 
     if form.validate_on_submit():
-        teacher = User.query.filter_by(email=roomIdUrlResult.json()["login"]).first()
-        teacherSession = User.query.filter_by(email=session['teacher_email']).first()
+        teacher = User.query.filter_by(email=roomIdUrlResult.json()["email"]).first()
+        #teacherSession = User.query.filter_by(email=session['teacher_email']).first()
         student = User.query.filter_by(email=loginUrlResult.json()["email"]).first()
         entry = Entry(student_email = loginUrlResult.json()["email"],
         teacher_email = roomIdUrlResult.json()["email"],
@@ -91,7 +92,7 @@ def zapisy():
         student_surname = loginUrlResult.json()["surname"],
         teacher_name = roomIdUrlResult.json()["name"],
         teacher_surname = roomIdUrlResult.json()["surname"],
-        #date = teacher.date,
+        date = teacher.date,
         time = teacher.time,
         end_time = teacher.end_time,
         reason = form.reason.data,
@@ -99,7 +100,7 @@ def zapisy():
         print("DUPA")
         db.session.add(entry)
         db.session.commit()
-        return redirect(url_for('student.dashboard'))
+        return redirect(url_for('student.results', login=login, roomId=roomId))
     return render_template('student/zapisy.html', form=form)
 
 

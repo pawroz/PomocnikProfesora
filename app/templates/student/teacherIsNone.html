@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} Login {% endblock %}
+
+{% block navbar %}
+<!-- Navigation -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="/"><img src="static/logo.png"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('student.dashboard') }}">Zapisy</a>
+                </li>
+                <li class="nav-item">
+                    {% if current_user.is_authenticated %}
+                    <a class="nav-link" href="{{ url_for('user.logout') }}">Wyloguj sie</a>
+                    {% else %}
+                    <a class="nav-link" href="{{ url_for('user.login') }}">Zaloguj sie</a>
+                    {% endif %} 
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ url_for('student.results') }}">Odpowiedzi</a>
+              </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#features">Informacje</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#clients">Klienci</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Kontakt</a>
+                </li>
+            </ul>
+        </div>
+    </nav><!-- End Navigation -->
+{% endblock navbar%}
+
+{% block name_form %}
+  <div class="captionForms text-center">
+    
+    <h1>Czesc {{ user_name }}</h1>
+    <h3>Poproś prowadzącego o wprowadzenie godzin dyżuru</h3>
+  </div>
+{% endblock %}
+
+
