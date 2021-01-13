@@ -80,8 +80,6 @@ def zapisy():
     #     print("jest prowadzacy")
     #     return render_template('student/dashboard.html', student=student, teacher=teacher)
 
-    #TODO: nie ma rubryki date, time - po wypelnieniu formularza nie zapisuje
-    #TODO: templatka student dashboard nie przyjmuje w argumentach teacher session 
     if form.validate_on_submit():
         teacher = User.query.filter_by(email=roomIdUrlResult.json()["email"]).first()
         #teacherSession = User.query.filter_by(email=session['teacher_email']).first()

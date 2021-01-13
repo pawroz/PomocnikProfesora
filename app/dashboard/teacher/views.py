@@ -5,6 +5,7 @@ from ... import db
 from . import teacher
 from ...user.forms import TeacherRegistrationForm
 import requests
+from .forms import ChangeHoursForm
 
 @teacher.route('/dashboardTeacher', methods=['GET', 'POST'])
 def dashboard():
@@ -52,11 +53,39 @@ def dashboard():
     else:
         print("prowadzacy istnieje")
 
-    entries = Entry.query.filter_by(teacher_email=session['teacher_email'])
+    entries = Entry.query.filter_by(teacher_email=teacherJson['email'])
 #   student_name = session['student_email']
     user = User.query.filter_by(email=session['teacher_email']).first()
     print(entries)
     return render_template('teacher/dashboard.html', entries=entries)
 
 
-    
+#TODO: nie zmienia się godzina gdy student zapisuje sie po aktualizacji godizny dyżuru
+@teacher.route('/changeEntryHours', methods=['GET', 'POST'])
+def ChangeEntryHours():
+    form = ChangeHoursForm()
+    roomId = request.args.get('roomId')
+    roomIdUrlResult = requests.post('http://localhost/Projekt-inzynierski/API/UsersByRoom.php?roomId={}'.format(roomId))
+    try:
+        teacherJson = roomIdUrlResult.json()
+    except:
+        print("login wrong")
+
+    if form.validate_on_submit():
+        teacher = User.query.filter_by(email=roomIdUrlResult.json()["email"]).first()
+        teacher.date = str(form.changeDateField.data)
+        teacher.time = str(form.changeTimeField.data)
+        teacher.end_time = str(form.changeEndTimeField.data)
+        # user = User(date=str(form.changeDateField.data),
+        # time=str(form.changeTimeField.data),
+        # end_time=str(form.changeEndTimeField.data))
+        print(str(form.changeDateField.data))
+        print(str(form.changeTimeField.data))
+        print(str(form.changeEndTimeField.data))
+        db.session.commit()
+    return render_template('teacher/changeEntryHours.html', form=form)
+
+    teacher = User.query.filter_by(email=roomIdUrlResult.json()["email"]).first()
+
+    if form.validate_on_submit():
+        teacher = User.query.filter_by(email=roomIdUrlResult.json()["email"]).first()
