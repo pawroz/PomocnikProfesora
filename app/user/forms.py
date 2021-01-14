@@ -25,7 +25,7 @@ class TeacherRegistrationForm(FlaskForm):
     #     DataRequired(), EqualTo('password2', message='Passwords must match.')])
     # password2 = PasswordField('Powtorz haslo', validators=[DataRequired()])
     # secret = PasswordField('Secret', validators=[DataRequired(), Regexp('^ABCD1234$', 0, 'Must provide valid secret!')])
-    submit = SubmitField('Register')
+    submit = SubmitField('ZAPISZ')
 
 class StudentRegistrationForm(FlaskForm):
     name = StringField('Imie', validators=[

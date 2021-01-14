@@ -95,16 +95,24 @@ def zapisy():
         end_time = teacher.end_time,
         reason = form.reason.data,
         decision = Decision.DEFAULT)
-        print("DUPA")
         db.session.add(entry)
         db.session.commit()
-        return redirect(url_for('student.results', login=login, roomId=roomId))
-    return render_template('student/zapisy.html', form=form)
+        return redirect(url_for('student.results', login=login, roomId=roomId)) ##
+    return render_template('student/zapisy.html', form=form) 
 
-
+#TODO: dorobic sprawdzenie permission 
 @student.route('/resultsStudent', methods=['GET', 'POST'])
 def results():
-    entries = Entry.query.filter_by(student_email=session['student_email'])
-    print(entries)
-    print(session['student_email'])
+    login = request.args.get('login')
+    roomId = request.args.get('roomId')
+    loginUrlResult = requests.post('http://localhost/Projekt-inzynierski/API/UsersByLogin.php?login={}'.format(login))
+    roomIdUrlResult = requests.post('http://localhost/Projekt-inzynierski/API/UsersByRoom.php?roomId={}'.format(roomId))
+    try:
+        teacherJson = roomIdUrlResult.json()
+        studentJson = loginUrlResult.json()
+    except:
+        print("roomId or login wrong")
+        
+    entries = Entry.query.filter_by(student_email = loginUrlResult.json()["email"])
+    #print(entries)
     return render_template('student/results.html', entries=entries)

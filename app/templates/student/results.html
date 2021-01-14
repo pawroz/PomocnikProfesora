@@ -17,13 +17,6 @@
                     <a class="nav-link" href="{{ url_for('student.dashboard') }}">Zapisy</a>
                 </li>
                 <li class="nav-item">
-                    {% if current_user.is_authenticated %}
-                    <a class="nav-link" href="{{ url_for('user.logout') }}">Wyloguj sie</a>
-                    {% else %}
-                    <a class="nav-link" href="{{ url_for('user.login') }}">Zaloguj sie</a>
-                    {% endif %} 
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="#features">Informacje</a>
                 </li>
                 <li class="nav-item">
@@ -31,6 +24,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#contact">Kontakt</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.google.com/">Wróc do Wykłady Webowe</a>
                 </li>
             </ul>
         </div>

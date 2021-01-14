@@ -10,11 +10,13 @@ from .forms import ChangeHoursForm
 @teacher.route('/dashboardTeacher', methods=['GET', 'POST'])
 def dashboard():
     form = TeacherRegistrationForm()
+    roomId = request.args.get('roomId')
     login = request.args.get('login')
-    loginUrlResult = requests.post('http://localhost/Projekt-inzynierski/API/UsersByLogin.php?login={}'.format(login))
 
+    loginUrlResult = requests.post('http://localhost/Projekt-inzynierski/API/UsersByLogin.php?login={}'.format(login))
+    roomIdUrlResult = requests.post('http://localhost/Projekt-inzynierski/API/UsersByRoom.php?roomId={}'.format(roomId))
     try:
-        teacherJson = loginUrlResult.json()
+        teacherJson = roomIdUrlResult.json()
     except:
         print("login wrong")
 
@@ -38,17 +40,16 @@ def dashboard():
             entry = Entry.query.filter_by(id=id).first()
             entry.decision = Decision.ACCEPT
             db.session.commit()
-            print(id)
         if request.form.get("decline"):
             id = request.form['decline']
             entry = Entry.query.filter_by(id=id).first()
             entry.decision = Decision.DECLINE
             db.session.commit()
+        # if request.form.get("change"):
+        #     return render_template('teacher/changeEntryHours.html')
 
-    #TODO: Pobiera date time i end_time z formularza / nie dodaje poprawnie do bazy danych 
     #  prowadzacy1 = User.query.filter_by(email='student1@wp.pl').first() -> prowadzacy1.date
     if User.query.filter_by(email=teacherJson['email']).first() is None:
-        #TODO- return template form tylko z godziną początek spotkania koniec spotkania zobacz register form teacher
         return render_template('user/register.html', form=form)
     else:
         print("prowadzacy istnieje")
@@ -59,18 +60,23 @@ def dashboard():
     print(entries)
     return render_template('teacher/dashboard.html', entries=entries)
 
-
-#TODO: nie zmienia się godzina gdy student zapisuje sie po aktualizacji godizny dyżuru
-@teacher.route('/changeEntryHours', methods=['GET', 'POST'])
-def ChangeEntryHours():
+#TODO: return redirect jakie argumenty mu dac permission 
+#TODO: po kliknieciu na ZMIEN DYZUR nie przekazuje dalej parametrow 
+@teacher.route('/changeEntryHours', methods=['GET', 'POST']) # po changeEntryHours podac wartosc loginu?
+def changeEntryHours():
     form = ChangeHoursForm()
+
     roomId = request.args.get('roomId')
+    login = request.args.get('login')
+
+    loginUrlResult = requests.post('http://localhost/Projekt-inzynierski/API/UsersByLogin.php?login={}'.format(login))
     roomIdUrlResult = requests.post('http://localhost/Projekt-inzynierski/API/UsersByRoom.php?roomId={}'.format(roomId))
     try:
         teacherJson = roomIdUrlResult.json()
     except:
         print("login wrong")
 
+    # if request.args.get('roomId'):
     if form.validate_on_submit():
         teacher = User.query.filter_by(email=roomIdUrlResult.json()["email"]).first()
         teacher.date = str(form.changeDateField.data)
@@ -83,9 +89,4 @@ def ChangeEntryHours():
         print(str(form.changeTimeField.data))
         print(str(form.changeEndTimeField.data))
         db.session.commit()
-    return render_template('teacher/changeEntryHours.html', form=form)
-
-    teacher = User.query.filter_by(email=roomIdUrlResult.json()["email"]).first()
-
-    if form.validate_on_submit():
-        teacher = User.query.filter_by(email=roomIdUrlResult.json()["email"]).first()
+    return render_template('teacher/changeEntryHours.html', form=form, roomId=roomId)
