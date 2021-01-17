@@ -60,25 +60,6 @@ def zapisy():
     if User.query.filter_by(email=teacherJson['email']).first() is None:
         print("nie ma prowadzacego")
         return render_template("student/teacherIsNone.html")
-    # else:
-    #     student = User(name=studentJson['name'],
-    #                 surname=studentJson['surname'],
-    #                 date="",
-    #                 time="",
-    #                 end_time="",
-    #                 email=studentJson['email'],
-    #                 password='',
-    #                 permission=Permission.STUDENT)
-    #     teacher = User(name=teacherJson['name'],
-    #         surname=teacherJson['surname'],
-    #         date="",
-    #         time="",
-    #         end_time="",
-    #         email=teacherJson['email'],
-    #         password='',
-    #         permission=Permission.TEACHER)
-    #     print("jest prowadzacy")
-    #     return render_template('student/dashboard.html', student=student, teacher=teacher)
 
     if form.validate_on_submit():
         teacher = User.query.filter_by(email=roomIdUrlResult.json()["email"]).first()

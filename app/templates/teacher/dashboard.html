@@ -16,11 +16,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('teacher.dashboard') }}">Strona glowna</a>
                 </li>
-                <!-- <form method = "post"> -->
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('teacher.changeEntryHours')}}" name="change">Zmień dyżur</a>
+                    <a class="nav-link" href="{{ url_for('teacher.changeEntryHours', roomId=roomId)}}">Zmień dyżur</a>
                 </li>
-            <!-- </form> -->
                 <li class="nav-item">
                     <a class="nav-link" href="#features">Informacje</a>
                 </li>
