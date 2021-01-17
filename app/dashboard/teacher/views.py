@@ -11,13 +11,13 @@ from .forms import ChangeHoursForm
 @teacher.route('/dashboardTeacher', methods=['GET', 'POST'])
 def dashboard():
     form = TeacherRegistrationForm()
-    roomId = request.args.get('roomId')
+    roomId = request.args.get('roomId', timeout=50)
     # login = request.args.get('login')
 
     # loginUrlResult = requests.post(
     #     'http://localhost/Projekt-inzynierski/API/UsersByLogin.php?login={}'.format(login))
     roomIdUrlResult = requests.post(
-        'http://localhost/Projekt-inzynierski/API/UsersByRoom.php?roomId={}'.format(roomId))
+        'https://s153070.projektstudencki.pl/API/UsersByRoom.php?roomId={}'.format(roomId))
     try:
         teacherJson = roomIdUrlResult.json()
     except:
@@ -65,9 +65,9 @@ def dashboard():
 @teacher.route('/changeEntryHours', methods=['GET', 'POST'])
 def changeEntryHours():
     form = ChangeHoursForm()
-    roomId = request.args.get('roomId')
+    roomId = request.args.get('roomId', timeout=50)
     roomIdUrlResult = requests.post(
-        'http://localhost/Projekt-inzynierski/API/UsersByRoom.php?roomId={}'.format(roomId))
+        'https://s153070.projektstudencki.pl/API/UsersByRoom.php?roomId={}'.format(roomId))
     try:
         teacherJson = roomIdUrlResult.json()
     except:

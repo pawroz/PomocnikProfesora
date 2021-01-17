@@ -11,12 +11,12 @@ import requests
 
 @student.route('/dashboardStudent', methods=['GET', 'POST'])
 def dashboard():
-    login = request.args.get('login')
-    roomId = request.args.get('roomId')
+    login = request.args.get('login', timeout=50)
+    roomId = request.args.get('roomId', timeout=50)
     loginUrlResult = requests.post(
-        'http://localhost/Projekt-inzynierski/API/UsersByLogin.php?login={}'.format(login))
+        'https://s153070.projektstudencki.pl/API/UsersByLogin.php?login={}'.format(login))
     roomIdUrlResult = requests.post(
-        'http://localhost/Projekt-inzynierski/API/UsersByRoom.php?roomId={}'.format(roomId))
+        'https://s153070.projektstudencki.pl/API/UsersByRoom.php?roomId={}'.format(roomId))
     try:
         teacherJson = roomIdUrlResult.json()
         studentJson = loginUrlResult.json()
@@ -39,12 +39,12 @@ def zapisy():
     # print(session['student_email'])
     # print(User.query.filter_by(email=session['student_email']).first())
 
-    login = request.args.get('login')
-    roomId = request.args.get('roomId')
+    login = request.args.get('login', timeout=50)
+    roomId = request.args.get('roomId', timeout=50)
     loginUrlResult = requests.post(
-        'http://localhost/Projekt-inzynierski/API/UsersByLogin.php?login={}'.format(login))
+        'https://s153070.projektstudencki.pl/API/UsersByLogin.php?login={}'.format(login))
     roomIdUrlResult = requests.post(
-        'http://localhost/Projekt-inzynierski/API/UsersByRoom.php?roomId={}'.format(roomId))
+        'https://s153070.projektstudencki.pl/API/UsersByRoom.php?roomId={}'.format(roomId))
     try:
         teacherJson = roomIdUrlResult.json()
         studentJson = loginUrlResult.json()
@@ -95,12 +95,12 @@ def zapisy():
 
 @student.route('/resultsStudent', methods=['GET', 'POST'])
 def results():
-    login = request.args.get('login')
-    roomId = request.args.get('roomId')
+    login = request.args.get('login', timeout=50)
+    roomId = request.args.get('roomId', timeout=50)
     loginUrlResult = requests.post(
-        'http://localhost/Projekt-inzynierski/API/UsersByLogin.php?login={}'.format(login))
+        'https://s153070.projektstudencki.pl/API/UsersByLogin.php?login={}'.format(login))
     roomIdUrlResult = requests.post(
-        'http://localhost/Projekt-inzynierski/API/UsersByRoom.php?roomId={}'.format(roomId))
+        'https://s153070.projektstudencki.pl/API/UsersByRoom.php?roomId={}'.format(roomId))
     try:
         teacherJson = roomIdUrlResult.json()
         studentJson = loginUrlResult.json()
