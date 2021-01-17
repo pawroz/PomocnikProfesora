@@ -14,9 +14,9 @@ def dashboard():
     login = request.args.get('login')
     roomId = request.args.get('roomId')
     loginUrlResult = requests.post(
-        'https://s153070.projektstudencki.pl/API/UsersByLogin.php?login={}'.format(login))
+        'http://localhost/Projekt-inzynierski/API/UsersByLogin.php?login={}'.format(login))
     roomIdUrlResult = requests.post(
-        'https://s153070.projektstudencki.pl/API/UsersByRoom.php?roomID={}'.format(roomId))
+        'http://localhost/Projekt-inzynierski/API/UsersByRoom.php?roomId={}'.format(roomId))
     try:
         teacherJson = roomIdUrlResult.json()
         studentJson = loginUrlResult.json()
@@ -42,9 +42,9 @@ def zapisy():
     login = request.args.get('login')
     roomId = request.args.get('roomId')
     loginUrlResult = requests.post(
-        'https://s153070.projektstudencki.pl/API/UsersByLogin.php?login={}'.format(login))
+        'http://localhost/Projekt-inzynierski/API/UsersByLogin.php?login={}'.format(login))
     roomIdUrlResult = requests.post(
-        'https://s153070.projektstudencki.pl/API/UsersByRoom.php?roomID={}'.format(roomId))
+        'http://localhost/Projekt-inzynierski/API/UsersByRoom.php?roomId={}'.format(roomId))
     try:
         teacherJson = roomIdUrlResult.json()
         studentJson = loginUrlResult.json()
@@ -66,7 +66,7 @@ def zapisy():
 
     if User.query.filter_by(email=teacherJson['email']).first() is None:
         print("nie ma prowadzacego")
-        return render_template("student/teacherIsNone.html")
+        return render_template("student/teacherIsNone.html", login=login)
 
     if form.validate_on_submit():
         teacher = User.query.filter_by(
@@ -88,7 +88,7 @@ def zapisy():
         db.session.add(entry)
         db.session.commit()
         return redirect(url_for('student.results', login=login, roomId=roomId))
-    return render_template('student/zapisy.html', form=form)
+    return render_template('student/zapisy.html', form=form, login=login)
 
 # TODO: dorobic sprawdzenie permission
 
@@ -98,9 +98,9 @@ def results():
     login = request.args.get('login')
     roomId = request.args.get('roomId')
     loginUrlResult = requests.post(
-        'https://s153070.projektstudencki.pl/API/UsersByLogin.php?login={}'.format(login))
+        'http://localhost/Projekt-inzynierski/API/UsersByLogin.php?login={}'.format(login))
     roomIdUrlResult = requests.post(
-        'https://s153070.projektstudencki.pl/API/UsersByRoom.php?roomID={}'.format(roomId))
+        'http://localhost/Projekt-inzynierski/API/UsersByRoom.php?roomId={}'.format(roomId))
     try:
         teacherJson = roomIdUrlResult.json()
         studentJson = loginUrlResult.json()
@@ -109,5 +109,5 @@ def results():
 
     entries = Entry.query.filter_by(
         student_email=loginUrlResult.json()["email"])
-    # print(entries)
+    print(login)
     return render_template('student/results.html', entries=entries)

@@ -17,7 +17,7 @@ def dashboard():
     # loginUrlResult = requests.post(
     #     'http://localhost/Projekt-inzynierski/API/UsersByLogin.php?login={}'.format(login))
     roomIdUrlResult = requests.post(
-        'https://s153070.projektstudencki.pl/API/UsersByRoom.php?roomID={}'.format(roomId))
+        'http://localhost/Projekt-inzynierski/API/UsersByRoom.php?roomId={}'.format(roomId))
     try:
         teacherJson = roomIdUrlResult.json()
     except:
@@ -67,7 +67,7 @@ def changeEntryHours():
     form = ChangeHoursForm()
     roomId = request.args.get('roomId')
     roomIdUrlResult = requests.post(
-        'https://s153070.projektstudencki.pl/API/UsersByRoom.php?roomID={}'.format(roomId))
+        'http://localhost/Projekt-inzynierski/API/UsersByRoom.php?roomId={}'.format(roomId))
     try:
         teacherJson = roomIdUrlResult.json()
     except:
