@@ -6,12 +6,13 @@ from . import teacher
 from ...user.forms import TeacherRegistrationForm
 import requests
 from .forms import ChangeHoursForm
+import datetime
 
 
 @teacher.route('/dashboardTeacher', methods=['GET', 'POST'])
 def dashboard():
     form = TeacherRegistrationForm()
-    roomId = request.args.get('roomId', timeout=50)
+    roomId = request.args.get('roomId')
     # login = request.args.get('login')
 
     # loginUrlResult = requests.post(
@@ -56,16 +57,28 @@ def dashboard():
         print("prowadzacy istnieje")
 
     entries = Entry.query.filter_by(teacher_email=teacherJson['email'])
-    user = User.query.filter_by(email=session['teacher_email']).first()
-    print(entries)
+    # user = User.query.filter_by(email=session['teacher_email']).first()
+    prowadzacy1 = User.query.filter_by(email='testMail@test.pl').first()
+    print(prowadzacy1.date)
+    for entry in entries:
+        today = datetime.datetime.today()
+        todayOnlyDay = today.strftime('%d')
+        date_time_str = entry.date
+        date_time_obj = datetime.datetime.strptime(date_time_str, '%Y-%m-%d')
+        entryTime = date_time_obj.strftime('%d')
+        expectedDate = int(todayOnlyDay) - int(entryTime)
+        # print(expectedDate)
+        if expectedDate > 7:
+            db.session.delete(entry)
+            db.session.commit()
     return render_template('teacher/dashboard.html', entries=entries, roomId=roomId)
 
 
 # po changeEntryHours podac wartosc roomId
-@teacher.route('/changeEntryHours', methods=['GET', 'POST'])
+@ teacher.route('/changeEntryHours', methods=['GET', 'POST'])
 def changeEntryHours():
     form = ChangeHoursForm()
-    roomId = request.args.get('roomId', timeout=50)
+    roomId = request.args.get('roomId')
     roomIdUrlResult = requests.post(
         'https://s153070.projektstudencki.pl/API/UsersByRoom.php?roomId={}'.format(roomId))
     try:

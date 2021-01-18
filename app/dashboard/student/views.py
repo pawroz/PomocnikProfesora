@@ -11,8 +11,8 @@ import requests
 
 @student.route('/dashboardStudent', methods=['GET', 'POST'])
 def dashboard():
-    login = request.args.get('login', timeout=50)
-    roomId = request.args.get('roomId', timeout=50)
+    login = request.args.get('login')
+    roomId = request.args.get('roomId')
     loginUrlResult = requests.post(
         'https://s153070.projektstudencki.pl/API/UsersByLogin.php?login={}'.format(login))
     roomIdUrlResult = requests.post(
@@ -39,8 +39,8 @@ def zapisy():
     # print(session['student_email'])
     # print(User.query.filter_by(email=session['student_email']).first())
 
-    login = request.args.get('login', timeout=50)
-    roomId = request.args.get('roomId', timeout=50)
+    login = request.args.get('login')
+    roomId = request.args.get('roomId')
     loginUrlResult = requests.post(
         'https://s153070.projektstudencki.pl/API/UsersByLogin.php?login={}'.format(login))
     roomIdUrlResult = requests.post(
@@ -50,6 +50,8 @@ def zapisy():
         studentJson = loginUrlResult.json()
     except:
         print("roomId or login wrong")
+    teacher = teacher = User.query.filter_by(
+        email=roomIdUrlResult.json()["email"]).first()
     if User.query.filter_by(email=studentJson['email']).first() is None:
         user = User(name=studentJson['name'],
                     surname=studentJson['surname'],
@@ -88,15 +90,15 @@ def zapisy():
         db.session.add(entry)
         db.session.commit()
         return redirect(url_for('student.results', login=login, roomId=roomId))
-    return render_template('student/zapisy.html', form=form, login=login)
+    return render_template('student/zapisy.html', form=form, login=login, teacher=teacher)
 
 # TODO: dorobic sprawdzenie permission
 
 
 @student.route('/resultsStudent', methods=['GET', 'POST'])
 def results():
-    login = request.args.get('login', timeout=50)
-    roomId = request.args.get('roomId', timeout=50)
+    login = request.args.get('login')
+    roomId = request.args.get('roomId')
     loginUrlResult = requests.post(
         'https://s153070.projektstudencki.pl/API/UsersByLogin.php?login={}'.format(login))
     roomIdUrlResult = requests.post(

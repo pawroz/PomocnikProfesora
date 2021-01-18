@@ -1,1 +1,1 @@
-web: gunicorn --bind 0.0.0.0:$PORT PomocnikProfesora:app
+web: gunicorn PomocnikProfesora:app

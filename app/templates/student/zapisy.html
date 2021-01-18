@@ -32,6 +32,8 @@
 {% block name_form %}
 <div class="captionForms text-center">
         <h1>Wypelnij formularz</h1>
+        <h3>Dzień oraz godzina spotkania </h3>
+        <h4>{{teacher.date}}   {{ teacher.time }}</h4>
     <div class="center_div ">
         {{ wtf.quick_form(form) }}
     </div>
