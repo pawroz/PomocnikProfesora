@@ -58,8 +58,8 @@ def dashboard():
 
     entries = Entry.query.filter_by(teacher_email=teacherJson['email'])
     # user = User.query.filter_by(email=session['teacher_email']).first()
-    prowadzacy1 = User.query.filter_by(email='testMail@test.pl').first()
-    print(prowadzacy1.date)
+    # prowadzacy1 = User.query.filter_by(email='testMail@test.pl').first()
+    # print(prowadzacy1.date)
     for entry in entries:
         today = datetime.datetime.today()
         todayOnlyDay = today.strftime('%d')
@@ -95,9 +95,10 @@ def changeEntryHours():
         # user = User(date=str(form.changeDateField.data),
         # time=str(form.changeTimeField.data),
         # end_time=str(form.changeEndTimeField.data))
-        print(str(form.changeDateField.data))
-        print(str(form.changeTimeField.data))
-        print(str(form.changeEndTimeField.data))
+        
+        # print(str(form.changeDateField.data))
+        # print(str(form.changeTimeField.data))
+        # print(str(form.changeEndTimeField.data))
         db.session.commit()
         return redirect(url_for('teacher.dashboard', roomId=roomId))
     return render_template('teacher/changeEntryHours.html', form=form, roomId=roomId)
