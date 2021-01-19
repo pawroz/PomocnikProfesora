@@ -95,7 +95,7 @@ def changeEntryHours():
         # user = User(date=str(form.changeDateField.data),
         # time=str(form.changeTimeField.data),
         # end_time=str(form.changeEndTimeField.data))
-        
+
         # print(str(form.changeDateField.data))
         # print(str(form.changeTimeField.data))
         # print(str(form.changeEndTimeField.data))
