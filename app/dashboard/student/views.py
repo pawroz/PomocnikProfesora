@@ -1,12 +1,11 @@
-from flask import render_template, redirect, request, url_for, flash, session
+from flask import render_template, redirect, request, url_for, flash, session, jsonify
 from flask_login import login_user, logout_user, login_required
 from ...models import User, Permission, Entry, Decision
 from . import student
 from .forms import ZapisyForm
 from ... import db
 import requests
-
-# KLASA JAK NA RAZIE NIEPOTRZEBNA
+import datetime
 
 
 @student.route('/dashboardStudent', methods=['GET', 'POST'])
@@ -35,12 +34,11 @@ def dashboard():
 @student.route('/zapisy', methods=['GET', 'POST'])
 def zapisy():
     form = ZapisyForm()
-    # print(session['teacher_email'])
-    # print(session['student_email'])
-    # print(User.query.filter_by(email=session['student_email']).first())
-
-    login = request.args.get('login')
-    roomId = request.args.get('roomId')
+    # if request.method == 'POST':
+    data = request.form
+    print(data['roomId'])
+    login = data['roomId']
+    roomId = data['login']
     loginUrlResult = requests.post(
         'https://s153070.projektstudencki.pl/API/UsersByLogin.php?login={}'.format(login))
     roomIdUrlResult = requests.post(
@@ -50,8 +48,18 @@ def zapisy():
         studentJson = loginUrlResult.json()
     except:
         print("roomId or login wrong")
-    teacher = teacher = User.query.filter_by(
+    teacher = User.query.filter_by(
         email=roomIdUrlResult.json()["email"]).first()
+    # entryDate = teacher.date
+    # today = datetime.date.today()
+    # entryDateobj = datetime.datetime.strptime(entryDate, '%Y-%m-%d')
+    # entryDateWeekLater = entryDateobj + datetime.timedelta(days=7)
+    # if entryDateobj.date() < today:
+    #     entryDate = str(entryDateWeekLater)
+    #     print(entryDateobj)
+    #     print(entryDateWeekLater)
+    #     db.session.commit()
+    # print(entryDate)
     if User.query.filter_by(email=studentJson['email']).first() is None:
         user = User(name=studentJson['name'],
                     surname=studentJson['surname'],
@@ -92,13 +100,12 @@ def zapisy():
         return redirect(url_for('student.results', login=login, roomId=roomId))
     return render_template('student/zapisy.html', form=form, login=login, teacher=teacher)
 
-# TODO: dorobic sprawdzenie permission
-
 
 @student.route('/resultsStudent', methods=['GET', 'POST'])
 def results():
-    login = request.args.get('login')
-    roomId = request.args.get('roomId')
+    data = request.form
+    login = data['login']
+    roomId = data['roomId']
     loginUrlResult = requests.post(
         'https://s153070.projektstudencki.pl/API/UsersByLogin.php?login={}'.format(login))
     roomIdUrlResult = requests.post(

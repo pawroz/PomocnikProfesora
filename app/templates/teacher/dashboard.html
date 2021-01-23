@@ -3,6 +3,7 @@
 
 {% block title %} Pomocnik Profesora {% endblock %}
 
+
 {% block navbar %}
 <!-- Navigation -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
@@ -14,7 +15,9 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('teacher.changeEntryHours', roomId=roomId)}}">Zmień dyżur</a>
+                    <form action = "{{ url_for('teacher.changeEntryHours')}}" method = "post">Zmień dyżur</form>
+                    <input type="text" style="display: none;" id="roomId" name="roomId" value="{{roomId}}">
+                    <!-- <a class="nav-link" href="{{ url_for('teacher.changeEntryHours', roomId=roomId)}}">Zmień dyżur</a> -->
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#features">Informacje</a>
@@ -36,7 +39,7 @@
 
 {% block name_form %}
   <div class="captionForms text-center">
-    <h1>Witaj {{ teacher_name }}</h1>
+    <h1>Witaj {{ teacher.name }}</h1>
     <h3>Oto lista zapisanych do Ciebie studentow</h3>
         <table class="table table-bordered">
             <thead>

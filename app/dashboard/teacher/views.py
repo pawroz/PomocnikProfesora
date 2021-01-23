@@ -12,7 +12,8 @@ import datetime
 @teacher.route('/dashboardTeacher', methods=['GET', 'POST'])
 def dashboard():
     form = TeacherRegistrationForm()
-    roomId = request.args.get('roomId')
+    data = request.form
+    roomId = data['roomId']
     # login = request.args.get('login')
 
     # loginUrlResult = requests.post(
@@ -56,6 +57,20 @@ def dashboard():
     else:
         print("prowadzacy istnieje")
 
+    # https://stackoverflow.com/questions/44687772/sqlalchemy-not-updating-record
+    entryDate = User.query.filter_by(
+        email=teacherJson['email']).first().date
+    today = datetime.date.today()
+    entryDateobj = datetime.datetime.strptime(entryDate, '%Y-%m-%d')
+    entryDateWeekLater = entryDateobj + datetime.timedelta(days=7)
+    if entryDateobj.date() < today:
+        entryDate = str(entryDateWeekLater)
+        print(entryDateobj)
+        print(entryDateWeekLater)
+        db.session.commit()
+
+    print(entryDate)
+
     entries = Entry.query.filter_by(teacher_email=teacherJson['email'])
     # user = User.query.filter_by(email=session['teacher_email']).first()
     # prowadzacy1 = User.query.filter_by(email='testMail@test.pl').first()
@@ -71,14 +86,17 @@ def dashboard():
         if expectedDate > 7:
             db.session.delete(entry)
             db.session.commit()
-    return render_template('teacher/dashboard.html', entries=entries, roomId=roomId)
+    return render_template('teacher/dashboard.html', entries=entries, roomId=roomId, teacher=teacherJson)
 
 
 # po changeEntryHours podac wartosc roomId
-@ teacher.route('/changeEntryHours', methods=['GET', 'POST'])
+@teacher.route('/changeEntryHours', methods=['GET', 'POST'])
 def changeEntryHours():
     form = ChangeHoursForm()
-    roomId = request.args.get('roomId')
+    data = request.form
+    roomId = data['roomId']
+    #roomId = request.args.get('roomId')
+
     roomIdUrlResult = requests.post(
         'https://s153070.projektstudencki.pl/API/UsersByRoom.php?roomId={}'.format(roomId))
     try:
