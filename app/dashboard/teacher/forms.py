@@ -6,7 +6,10 @@ from datetime import datetime
 
 
 class ChangeHoursForm(FlaskForm):
-    changeDateField = DateField('Termin',format='%Y-%m-%d', validators=[DataRequired()], default=datetime.now())
-    changeTimeField = TimeField('Poczatek spotkania',format='%H:%M', validators=[DataRequired()])
-    changeEndTimeField = TimeField('Koniec spotkania',format='%H:%M', validators=[DataRequired()])
-    submit = SubmitField('Zapisz')  
+    changeDateField = DateField(
+        'Termin', format='%Y-%m-%d', validators=[DataRequired()], default=datetime.now())
+    changeTimeField = TimeField(
+        'Początek spotkania', format='%H:%M', validators=[DataRequired()])
+    changeEndTimeField = TimeField(
+        'Koniec spotkania', format='%H:%M', validators=[DataRequired()])
+    submit = SubmitField('Zapisz')

@@ -7,7 +7,7 @@
 {% block navbar %}
 <!-- Navigation -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="{{ url_for('teacher.dashboard') }}"><img src="static/logo.png"></a>
+        <a class="navbar-brand" ><img src="static/logo.png"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
             <span class="navbar-toggler-icon" data-toggle="collapse"></span>
         </button>
@@ -15,8 +15,9 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <form action = "{{ url_for('teacher.changeEntryHours')}}" method = "post">Zmień dyżur</form>
-                    <input type="text" style="display: none;" id="roomId" name="roomId" value="{{roomId}}">
+                    <form action = "{{ url_for('teacher.changeEntryHours')}}" method = "post"> <a class="nav-link" href="{{ url_for('teacher.changeEntryHours')}}">Zmień dyżur</a></form>
+                        <!-- <input type="text" name="roomId" value="{{roomId}}">
+                        <input type="text" name="roomAuthtoken" value="{{roomAuthtoken}}"> -->
                     <!-- <a class="nav-link" href="{{ url_for('teacher.changeEntryHours', roomId=roomId)}}">Zmień dyżur</a> -->
                 </li>
                 <li class="nav-item">
@@ -40,15 +41,15 @@
 {% block name_form %}
   <div class="captionForms text-center">
     <h1>Witaj {{ teacher.name }}</h1>
-    <h3>Oto lista zapisanych do Ciebie studentow</h3>
+    <h3>Oto lista zapisanych do Ciebie studentów</h3>
         <table class="table table-bordered">
             <thead>
               <tr>
-                <th scope="col">Imie Studenta</th>
+                <th scope="col">Imię Studenta</th>
                 <th scope="col">Nazwisko Studenta</th>
                 <th scope="col">Email Studenta</th>
                 <th scope="col">Data</th>
-                <th scope="col">Powod</th>
+                <th scope="col">Powód</th>
                 <th scope="col">Decyzja</th>
               </tr>
             </thead>
