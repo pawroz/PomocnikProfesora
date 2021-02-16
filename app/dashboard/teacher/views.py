@@ -12,31 +12,39 @@ import datetime
 @teacher.route('/dashboardTeacher', methods=['GET', 'POST'])
 def dashboard():
     form = TeacherRegistrationForm()
-    roomId = request.args.get('roomId')
-    # login = request.args.get('login')
+    if 'roomId' in request.form and 'roomAuthtoken' in request.form:
+        roomId = request.form.get('roomId')
+        token = request.form.get('roomAuthtoken')
+        print(roomId)
+        print(token)
+        # roomId = request.args.get('roomId')
+        # roomIdUrlResult = requests.post(
+        #     'https://s153070.projektstudencki.pl/API/UsersByRoom.php?roomId={}'.format(roomId))
+        roomIdUrlResult = requests.post(
+            'https://s153070.projektstudencki.pl/API/UsersByRoom.php?roomId={}&token={}'.format(roomId, token))
 
-    # loginUrlResult = requests.post(
-    #     'http://localhost/Projekt-inzynierski/API/UsersByLogin.php?login={}'.format(login))
-    roomIdUrlResult = requests.post(
-        'https://s153070.projektstudencki.pl/API/UsersByRoom.php?roomId={}'.format(roomId))
-    try:
-        teacherJson = roomIdUrlResult.json()
-    except:
-        print("login wrong")
+        try:
+            teacherJson = roomIdUrlResult.json()
+            print(teacherJson)
+        except:
+            print("roomId or token wrong")
+
+        session['teacher'] = teacherJson
+        session['roomId'] = roomId
+        session['token'] = token
+
+    # teacher = User.query.filter_by(email=teacherJson['email']).first()
 
     if request.method == 'POST':
         if request.form.get("submit"):
-            user = User(name=teacherJson['name'],
-                        surname=teacherJson['surname'],
+            user = User(name=session['teacher']['name'],
+                        surname=session['teacher']['surname'],
                         date=str(form.date.data),
                         time=str(form.time.data),
                         end_time=str(form.end_time.data),
-                        email=teacherJson['email'],
+                        email=session['teacher']['email'],
                         password='',
                         permission=Permission.TEACHER)
-            print(str(form.date.data))
-            print(str(form.time.data))
-            print(str(form.end_time.data))
             db.session.add(user)
             db.session.commit()
         if request.form.get("accept"):
@@ -51,15 +59,15 @@ def dashboard():
             db.session.commit()
 
     #  prowadzacy1 = User.query.filter_by(email='student1@wp.pl').first() -> prowadzacy1.date
-    if User.query.filter_by(email=teacherJson['email']).first() is None:
+    if User.query.filter_by(email=session['teacher']['email']).first() is None:
         return render_template('user/register.html', form=form)
     else:
         print("prowadzacy istnieje")
 
-    entries = Entry.query.filter_by(teacher_email=teacherJson['email'])
+    entries = Entry.query.filter_by(teacher_email=session['teacher']['email'])
     # user = User.query.filter_by(email=session['teacher_email']).first()
-    prowadzacy1 = User.query.filter_by(email='testMail@test.pl').first()
-    print(prowadzacy1.date)
+    # prowadzacy1 = User.query.filter_by(email='testMail@test.pl').first()
+    # print(prowadzacy1.date)
     for entry in entries:
         today = datetime.datetime.today()
         todayOnlyDay = today.strftime('%d')
@@ -71,24 +79,27 @@ def dashboard():
         if expectedDate > 7:
             db.session.delete(entry)
             db.session.commit()
-    return render_template('teacher/dashboard.html', entries=entries, roomId=roomId)
+    return render_template('teacher/dashboard.html', entries=entries, roomId=session['roomId'],
+                           teacher=session['teacher'], roomAuthtoken=session['token'])
 
 
 # po changeEntryHours podac wartosc roomId
-@ teacher.route('/changeEntryHours', methods=['GET', 'POST'])
+@teacher.route('/changeEntryHours', methods=['GET', 'POST'])
 def changeEntryHours():
     form = ChangeHoursForm()
-    roomId = request.args.get('roomId')
-    roomIdUrlResult = requests.post(
-        'https://s153070.projektstudencki.pl/API/UsersByRoom.php?roomId={}'.format(roomId))
-    try:
-        teacherJson = roomIdUrlResult.json()
-    except:
-        print("login wrong")
+    # roomId = request.form.get('roomId')
+    # token = request.form.get('roomAuthtoken')
+    # roomIdUrlResult = requests.post(
+    #     'http://localhost/API/UsersByRoom.php?roomId={}&token={}'.format(roomId, token))
+    # try:
+    #     teacherJson = roomIdUrlResult.json()
+    # except:
+    #     print("login wrong")
+    print(session['teacher'])
 
     if form.validate_on_submit():
         teacher = User.query.filter_by(
-            email=roomIdUrlResult.json()["email"]).first()
+            email=session['teacher']["email"]).first()
         teacher.date = str(form.changeDateField.data)
         teacher.time = str(form.changeTimeField.data)
         teacher.end_time = str(form.changeEndTimeField.data)
@@ -99,5 +110,6 @@ def changeEntryHours():
         print(str(form.changeTimeField.data))
         print(str(form.changeEndTimeField.data))
         db.session.commit()
-        return redirect(url_for('teacher.dashboard', roomId=roomId))
-    return render_template('teacher/changeEntryHours.html', form=form, roomId=roomId)
+        # po zmienie dyzuru idą args w params
+        return redirect(url_for('teacher.dashboard'))
+    return render_template('teacher/changeEntryHours.html', form=form, roomId=session['roomId'])

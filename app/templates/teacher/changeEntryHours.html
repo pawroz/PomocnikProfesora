@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %} Login {% endblock %}
+{% block title %} Zapisy {% endblock %}
 
 {% block navbar %}
 <!-- Navigation -->
@@ -23,22 +23,18 @@
                     <a class="nav-link" href="#contact">Kontakt</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('student.results', login=login)}}">Twoje Konsultacje</a>
-                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('teacher.dashboard')}}">Twoje Konsultacje</a>
+                </li>
             </ul>
         </div>
     </nav><!-- End Navigation -->
 {% endblock navbar%}
 
 {% block name_form %}
-  <div class="captionForms text-center">
-    
-    <h1>Czesc {{ user_name }}</h1>
-    <h3>Poproś prowadzącego o wprowadzenie godzin dyżuru</h3>
-    <button type="submit" class="btn btn-outline-light btn-lg" name="backToUrl" onclick="history.back()">
-        Cofnij do Wykłady Webowe
-    </button>
-  </div>
+<div class="captionForms text-center">
+        <h1>Wypełnij formularz zmiany godzin dyżuru</h1>
+    <div class="center_div ">
+        {{ wtf.quick_form(form) }}
+    </div>
+</div>
 {% endblock %}
-
-
