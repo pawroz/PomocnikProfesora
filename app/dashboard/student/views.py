@@ -49,10 +49,10 @@ def zapisy():
         # roomIdUrlResult = requests.post(
         #     'https://s153070.projektstudencki.pl/API/UsersByRoom.php?roomId={}'.format(roomId))
         roomIdUrlResult = requests.post(
-            'http://localhost/API/UsersByRoom.php?roomId={}&token={}'.format(roomId, roomToken))
+            'https://s153070.projektstudencki.pl/API/UsersByRoom.php?roomId={}&token={}'.format(roomId, roomToken))
 
         loginUrlResult = requests.post(
-            'http://localhost/API/UsersByLogin.php?login={}&token={}'.format(login, userToken))
+            'https://s153070.projektstudencki.pl/API/UsersByLogin.php?login={}&token={}'.format(login, userToken))
 
         try:
             teacherJson = roomIdUrlResult.json()
@@ -130,7 +130,7 @@ def results():
         userToken = request.form.get('userAuthtoken')
         # roomId = request.form.get('roomId')
         loginUrlResult = requests.post(
-            'http://localhost/API/UsersByLogin.php?login={}&token={}'.format(login, userToken))
+            'https://s153070.projektstudencki.pl/API/UsersByLogin.php?login={}&token={}'.format(login, userToken))
         # roomIdUrlResult = requests.post(
         #     'http://localhost/API/UsersByRoom.php?login={}&token={}'.format(roomId, roomToken))
         try:
