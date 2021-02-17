@@ -57,6 +57,14 @@ body {
   margin: 0 auto;
   width: 20%; /* value of your choice which suits your alignment */
 }
+.center_div p.error {
+  display: none;
+  visibility: hidden;
+}
+.center_div p.help-block {
+  display: none;
+  visibility: hidden;
+}
 .caption h1 {
   font-size: 3rem;
   font-weight: 700;

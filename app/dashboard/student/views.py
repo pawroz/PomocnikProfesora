@@ -5,6 +5,7 @@ from . import student
 from .forms import ZapisyForm
 from ... import db
 import requests
+from flask_wtf import csrf
 
 # noneeded function
 # @student.route('/dashboardStudent', methods=['GET', 'POST'])
@@ -119,7 +120,7 @@ def zapisy():
         db.session.add(entry)
         db.session.commit()
         return redirect(url_for('student.results', login=session['login']))
-
+    csrf.generate_csrf()
     return render_template('student/zapisy.html', form=form, login=session['login'], teacherSession=session['teacher'], teacher=teacher)
 
 

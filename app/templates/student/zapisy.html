@@ -14,7 +14,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('student.results', login=login)}}">Twoje Konsultacje</a>
+                    <a class="nav-link" href="{{ url_for('student.results')}}">Twoje Konsultacje</a>
                 <li class="nav-item">
                     <a class="nav-link" href="#features">Informacje</a>
                 </li>
@@ -31,12 +31,12 @@
 
 {% block name_form %}
 <div class="captionForms text-center">
-    {{ form.csrf_token }}
         <h1>Wypełnij formularz</h1>
         <h3>Dzień oraz godzina spotkania </h3>
         <h4>{{teacher.date}}   {{ teacher.time }}</h4>
     <div class="center_div ">
         {{ wtf.quick_form(form) }}
+        {{ form.csrf_token }}
     </div>
 </div>
 {% endblock %}
