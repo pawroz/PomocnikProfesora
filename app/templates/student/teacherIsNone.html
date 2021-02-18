@@ -23,7 +23,7 @@
                     <a class="nav-link" href="#contact">Kontakt</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('student.results', login=login)}}">Twoje Konsultacje</a>
+                    <a class="nav-link" href="{{ url_for('student.results')}}">Twoje Konsultacje</a>
                 <li class="nav-item">
             </ul>
         </div>
@@ -33,11 +33,12 @@
 {% block name_form %}
   <div class="captionForms text-center">
     
-    <h1>Czesc {{ user_name }}</h1>
+    <h1>Czesc {{ student.name }}</h1>
     <h3>Poproś prowadzącego o wprowadzenie godzin dyżuru</h3>
-    <button type="submit" class="btn btn-outline-light btn-lg" name="backToUrl" onclick="history.back()">
-        Cofnij do Wykłady Webowe
-    </button>
+        <a href="javascript:window.open('','_self').close();">
+            <button type="submit" class="btn btn-outline-light btn-lg">Wróc do Wykłady Webowe</button>
+        </a>
+    
   </div>
 {% endblock %}
 

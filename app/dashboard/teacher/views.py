@@ -75,7 +75,7 @@ def dashboard():
         date_time_obj = datetime.datetime.strptime(date_time_str, '%Y-%m-%d')
         entryTime = date_time_obj.strftime('%d')
         expectedDate = int(todayOnlyDay) - int(entryTime)
-        # print(expectedDate)
+        print(expectedDate)
         if expectedDate > 7:
             db.session.delete(entry)
             db.session.commit()

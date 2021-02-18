@@ -42,10 +42,10 @@ def zapisy():
         roomId = request.form.get('roomId')
         roomToken = request.form.get('roomAuthtoken')
         userToken = request.form.get('userAuthtoken')
-        print(login)
-        print(roomId)
-        print(roomToken)
-        print(userToken)
+        # print(login)
+        # print(roomId)
+        # print(roomToken)
+        # print(userToken)
         # roomId = request.args.get('roomId')
         # roomIdUrlResult = requests.post(
         #     'https://s153070.projektstudencki.pl/API/UsersByRoom.php?roomId={}'.format(roomId))
@@ -101,8 +101,8 @@ def zapisy():
         print("student istnieje")
 
     if User.query.filter_by(email=session['teacher']['email']).first() is None:
-        print("nie ma prowadzacego")
-        return render_template("student/teacherIsNone.html", login=login)
+        print(session['login'])
+        return render_template("student/teacherIsNone.html", student=session['student'])
 
     if form.validate_on_submit():
         #teacherSession = User.query.filter_by(email=session['teacher_email']).first()
@@ -119,9 +119,8 @@ def zapisy():
                       decision=Decision.DEFAULT)
         db.session.add(entry)
         db.session.commit()
-        return redirect(url_for('student.results', login=session['login']))
-    csrf.generate_csrf()
-    return render_template('student/zapisy.html', form=form, login=session['login'], teacherSession=session['teacher'], teacher=teacher)
+        return redirect(url_for('student.results'))
+    return render_template('student/zapisy.html', form=form, login=session['login'], teacherSession=session['teacher'], teacher=teacher, studentSession=session['student'])
 
 
 @student.route('/resultsStudent', methods=['GET', 'POST'])
@@ -144,7 +143,6 @@ def results():
         session['student'] = studentJson
         # session['roomId'] = roomId
         session['login'] = login
-
     entries = Entry.query.filter_by(
         student_email=session['student']["email"])
     # print(login)

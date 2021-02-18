@@ -294,13 +294,15 @@ hr.socket {
 .captionForms {
   width: 100%;
   max-width: 100%;
-  position: absolute;
-  top: 10%;
+  position: relative;
   z-index: 1;
   color: white;
   text-transform: uppercase;
+  height: auto;
+  top: 60%;
   /* text-align: center; */
 }
+
 .captionForms h1 {
   padding-bottom: 1rem;
   padding-top: 2.5rem;
@@ -322,13 +324,22 @@ hr.socket {
 /*============= Table Student =============*/
 
 .table {
-  width: 100%;
+  width: 99.9%;
   color: white;
 }
 
 /*============= Login Form =============*/
 .btn {
   color: white;
+}
+
+#submit {
+  border: solid;
+}
+#submit:hover {
+  color: #212529;
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
 }
 /*============ BOOTSTRAP BREAK POINTS:
 
