@@ -11,7 +11,8 @@
 * [Contact](#contact)
 
 ## General info
-You can get extra lesson in youre school or university, if u have any problem in subject or want to be better then you were yesterday!
+Microserwis of one bigger application https://s153070.projektstudencki.pl/. This services are connected with REST API. You can login only if you are student or teacher from WMI UAM Poznan. Its LDAP login system.
+You can get extra lesson in your school or university, if u have any problem in subject or want to be better then you were yesterday!
 
 ## Screenshots
 ![Example screenshot](./images/123584955_4037319149616248_4941042612904498194_n.png)
@@ -35,12 +36,10 @@ You need to have python3 installed. In project folder:
 * Teachers can reject or accept lesson
 * Student see Teachers decision
 
-To-do list:
-* Double autorization
-* Editable account information
+
 
 ## Status
-Project is: _in progress_
+Project is: _finished_
 
 
 ## Contact
