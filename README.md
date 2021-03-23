@@ -35,7 +35,8 @@ You need to have python3 installed. In project folder:
 * Student can entry to extra lessons
 * Teachers can reject or accept lesson
 * Student see Teachers decision
-
+* Teacher can update his date of meeting
+* Automatic deletion entry after 14 days
 
 
 ## Status
