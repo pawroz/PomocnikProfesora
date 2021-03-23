@@ -16,6 +16,8 @@ You can get extra lesson in your school or university, if u have any problem in 
 
 ## Screenshots
 ![Example screenshot](./images/123584955_4037319149616248_4941042612904498194_n.png)
+![Example screenshot](./images/123516075_320628419109019_3365764715856033557_n.png)
+
 
 ## Technologies
 * Python
