@@ -11,7 +11,7 @@
 * [Screenshots](#screenshots)
 
 ## General info
-Microserwis of one bigger application https://s153070.projektstudencki.pl/. This services are connected with REST API. You can login only if you are student or teacher from WMI UAM Poznan. Its LDAP login system.
+Microserwis of application https://s153070.projektstudencki.pl/ (https://github.com/strus100/Projekt-inzynierski). This services are connected with REST API. You can login only if you are student or teacher from WMI UAM Poznan. Its LDAP login system.
 You can get extra lesson in your school or university, if u have any problem in subject or want to be better then you were yesterday!
 
 
